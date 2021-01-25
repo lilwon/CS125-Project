@@ -9,8 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_margin="16dp"
-        android:onCLick="ClickLogo"
-        android:src ="" />
+        android:onClick="ClickLogo"
+        android:src ="@drawable/ic_android" />
 
     <TextView
         android:layout_width="match_parent"
@@ -32,7 +32,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gavity="center_vertical"
         android:onClick="ClickHome"
         android:orientation="horizontal">
 
