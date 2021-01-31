@@ -1,40 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/drawer_layout"
-    tools:context=".Dashboard">
+    android:background="#FFF"
+    android:orientation="vertical"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp">
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content"
+        android:background="#FFF"
+        android:orientation="horizontal"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp">
 
-        <include
-            layout="@layout/main_toolbar" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="ClickMenu"
+            android:padding="15dp"
+            android:src="@drawable/ic_menu" />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Dashboard"
-            android:textSize="50sp"
-            android:textStyle="bold"
-            android:gravity="center"/>
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:padding="15dp"
+            android:text="Sleep Tracker"
+            android:textAlignment="center"
+            android:textColor="#636363"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-        <RelativeLayout
-            android:layout_width="300dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="@android:color/white" >
-
-            <include
-                layout="@layout/main_nav_drawer" />
-
-        </RelativeLayout>
-
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:src="@drawable/ic_more" />
     </LinearLayout>
 
-</androidx.drawerlayout.widget.DrawerLayout>
+    <!--    <EditText-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="12dp"-->
+    <!--        android:hint="hi"-->
+    <!--        android:paddingLeft="25dp"-->
+    <!--        android:paddingTop="45dp"-->
+    <!--        android:paddingRight="25dp" />-->
+
+    <!--    <EditText-->
+    <!--        android:layout_margin="12dp"-->
+    <!--        android:paddingTop="45dp"-->
+    <!--        android:paddingLeft="25dp"-->
+    <!--        android:paddingRight="25dp"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:hint="hi" />-->
+
+    <!--    <EditText-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="12dp"-->
+    <!--        android:hint="hi"-->
+    <!--        android:paddingLeft="25dp"-->
+    <!--        android:paddingTop="45dp"-->
+    <!--        android:paddingRight="25dp" />-->
+
+
+    <EditText
+        android:id="@+id/welcomeBack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Welcome Back!"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#000"
+        android:textSize="35sp" />
+
+    <Button
+        android:id="@+id/enterSleepActivity"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="15dp"
+        android:clickable="true"
+        android:onClick="ClickHome"
+        android:linksClickable="false"
+        android:text="Enter Sleep Activity"
+        android:textColor="#000000"
+        app:backgroundTint="#FFFFFF" />
+
+    <Button
+        android:id="@+id/sleepRec"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="15dp"
+        android:text="My Sleep Recommendation"
+        android:textColor="#000000"
+        app:backgroundTint="#FFFFFF" />
+
+</LinearLayout>
+
+
+
+
+
