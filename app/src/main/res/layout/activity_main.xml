@@ -13,53 +13,73 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <!-- Remove after implementing another Activity
+             Since this is now login page -->
         <include
             layout="@layout/main_toolbar"/>
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="370dp"
+            android:layout_height="274dp"
             android:gravity="center"
-            android:text="Home"
-            android:textSize="50sp" />
+            android:text="Welcome to Sleep Tracker!"
+            android:textSize="50sp"
+            android:textStyle="bold"/>
 
-        <EditText
-            android:id="@+id/emailLogin"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            android:singleLine="false"
-            android:text=" Email Address" />
+            android:layout_height="511dp"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/passwordLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:text="Password" />
 
-        <Button
-            android:id="@+id/loginBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="LOGIN"
-            app:backgroundTint="#9C27B0" />
+            <EditText
+                android:id="@+id/emailLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:singleLine="false"
+                android:hint="Email"
+                android:textSize="25sp" />
 
-        <Button
-            android:id="@+id/registerBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Register"
-            app:backgroundTint="#9C27B0" />
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="30dp" />
 
+            <EditText
+                android:id="@+id/passwordLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textSize="25sp"
+                android:hint="Password"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/loginBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="LOGIN"
+                app:backgroundTint="#9C27B0" />
+
+            <Button
+                android:id="@+id/registerBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Register"
+                app:backgroundTint="#9C27B0" />
+
+        </LinearLayout>
+
+        <!--- Hide temporariliy for Login Screen
         <Button
             android:id="@+id/sleepBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Open Sleep Setting" />
-
+         -->
 
     </LinearLayout>
 

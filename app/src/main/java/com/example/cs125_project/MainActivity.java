@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mAuth = FirebaseAuth.getInstance();
 
+        /* Temp hide
         sleepBtn = (Button) findViewById(R.id.sleepBtn);
         sleepBtn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 openSleepActivity();
             }
         });
+         */
     }
 
     public void ClickMenu(View view) {
