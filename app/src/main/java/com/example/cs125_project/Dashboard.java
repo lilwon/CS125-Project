@@ -37,7 +37,6 @@ public class Dashboard extends AppCompatActivity {
 
     public void ClickMenu(View view) {
         MainActivity.openDrawer(dl);
-
     }
 
     public void ClickLogo(View view) {
