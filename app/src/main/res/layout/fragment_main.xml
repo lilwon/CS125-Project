@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/welcomeBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Welcome Back!"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="#000"
+            android:textSize="35sp" />
+
+        <Button
+            android:id="@+id/enterSleepActivity"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="15dp"
+            android:clickable="true"
+            android:linksClickable="false"
+            android:text="Enter Sleep Activity"
+            android:textColor="#000000"
+            app:backgroundTint="#FFFFFF"/>
+
+        <Button
+            android:id="@+id/sleepRec"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="15dp"
+            android:text="My Sleep Recommendation"
+            android:textColor="#000000"
+            app:backgroundTint="#FFFFFF" />
+
+
+    </LinearLayout>
+
+
+</FrameLayout>

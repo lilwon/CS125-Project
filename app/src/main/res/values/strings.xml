@@ -3,4 +3,6 @@
     <string name="save">Save</string>
     <string name="tempview">TempView</string>
     <string name="how_many_hours_of_sleep">How Many Hours of Sleep?</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

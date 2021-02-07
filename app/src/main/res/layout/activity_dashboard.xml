@@ -21,68 +21,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabMode="scrollable"
-            app:tabContentStart="56dp" >
+            app:tabContentStart="56dp"
+            android:id="@+id/tabLayout">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Main"/>
+                android:text="Main"
+                android:id="@+id/mainTab"/>
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Graph"/>
+                android:text="Graph"
+                android:id="@+id/graphTab"/>
 
         </com.google.android.material.tabs.TabLayout>
 
-        <androidx.viewpager2.widget.ViewPager2
+        <androidx.viewpager.widget.ViewPager
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:id="@+id/viewPager"/>
 
-        <!-- Buttons are inside parents' field -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/welcomeBack"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Welcome Back!"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textColor="#000"
-                android:textSize="35sp" />
-
-            <Button
-                android:id="@+id/enterSleepActivity"
-                android:layout_width="300dp"
-                android:layout_height="70dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="15dp"
-                android:clickable="true"
-                android:linksClickable="false"
-                android:onClick="ClickHome"
-                android:text="Enter Sleep Activity"
-                android:textColor="#000000"
-                app:backgroundTint="#FFFFFF" />
-
-            <Button
-                android:id="@+id/sleepRec"
-                android:layout_width="300dp"
-                android:layout_height="70dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="15dp"
-                android:text="My Sleep Recommendation"
-                android:textColor="#000000"
-                app:backgroundTint="#FFFFFF" />
-
-
-        </LinearLayout>
 
     </LinearLayout>
 
