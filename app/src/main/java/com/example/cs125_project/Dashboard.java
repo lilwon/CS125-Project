@@ -48,7 +48,7 @@ public class Dashboard extends AppCompatActivity {
     }
 
     public void ClickDashboard(View view) {
-        recreate();
+        MainActivity.closeDrawer(dl);
     }
 
 

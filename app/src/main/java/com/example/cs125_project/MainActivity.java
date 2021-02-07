@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void ClickHome(View view) {
-        recreate();
+        closeDrawer(dl);
     }
 
     public void ClickDashboard(View view) {
