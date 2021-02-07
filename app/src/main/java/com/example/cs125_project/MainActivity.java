@@ -21,7 +21,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-
+// More likely to be Login screen
+// May need to "bypass" to directly go to Dashboard or something
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private Button sleepBtn;
 

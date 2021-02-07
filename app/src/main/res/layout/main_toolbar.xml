@@ -19,7 +19,8 @@
         android:text="Sleep Tracker"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textAlignment="center"
+        android:textAlignment="inherit"
+        android:paddingLeft="20sp"
         android:layout_gravity="center_horizontal"
         android:textColor="#636363" />
 

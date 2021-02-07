@@ -17,10 +17,11 @@
             layout="@layout/main_toolbar" />
 
         <!-- Scrollable Tabs for new pages -->
+        <!-- Change tabMode to fixed for now (may add new Fragments later) -->
         <com.google.android.material.tabs.TabLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabMode="scrollable"
+            app:tabMode="fixed"
             app:tabContentStart="56dp"
             android:id="@+id/tabLayout">
 

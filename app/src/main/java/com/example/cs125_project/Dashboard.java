@@ -22,10 +22,13 @@ import java.util.List;
 public class Dashboard extends AppCompatActivity {
 
     DrawerLayout dl;
-    private Button enterSleepActivity;
+    // Moved to Main Fragment
+    // private Button enterSleepActivity;
 
-    TabLayout tab;
-    ViewPager viewPager;
+    // Used for sliding tabs
+    private PagerAdapter pagerAdapter;
+    private TabLayout tab;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,70 +41,17 @@ public class Dashboard extends AppCompatActivity {
         tab = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
 
-        ArrayList<String> tabArray = new ArrayList<>();
-        tabArray.add("Main");
-        tabArray.add("Graph");
+        // Setting up Adapter to link
+        pagerAdapter = new PagerAdapter(getSupportFragmentManager());
+        pagerAdapter.addFragment(new MainFragment(), "Main");
+        pagerAdapter.addFragment(new GraphFragment(), "Graph");
 
-        prepViewPager(viewPager, tabArray);
-
-       tab.setupWithViewPager(viewPager);
-
-    }
-
-    private void prepViewPager(ViewPager viewPager, ArrayList<String> tabArray) {
-        PageAdapter adapter = new PageAdapter(getSupportFragmentManager());
-
-        MainFragment frag = new MainFragment();
-
-        for (int i = 0; i < tabArray.size(); i++) {
-            Bundle bundle= new Bundle();
-            bundle.putString("title", tabArray.get(i) );
-
-            frag.setArguments(bundle);
-
-            adapter.addFragment(frag, tabArray.get(i));
-
-            frag = new MainFragment();
-        }
-
-        // Set Page adapter
-        viewPager.setAdapter(adapter);
-
-    }
-
-    private class PageAdapter extends FragmentPagerAdapter {
-        ArrayList<String> tempList = new ArrayList<>();
-        List<Fragment> fragmentList = new ArrayList<>();
-
-        public void addFragment(Fragment frag, String fragName) {
-            tempList.add(fragName);
-            fragmentList.add(frag);
-        }
-
-        public PageAdapter(@NonNull FragmentManager fm) {
-            super(fm);
-        }
-
-        @NonNull
-        @Override
-        public Fragment getItem(int position) {
-            return fragmentList.get(position);
-        }
-
-
-        @Override
-        public int getCount() {
-            return fragmentList.size();
-        }
-
-        @Nullable
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return tempList.get(position);
-        }
+        viewPager.setAdapter(pagerAdapter);
+        tab.setupWithViewPager(viewPager);
     }
 
 
+    // Below is for Navigation Drawer
     public void ClickMenu(View view) {
         MainActivity.openDrawer(dl);
     }
