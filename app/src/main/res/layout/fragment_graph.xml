@@ -17,10 +17,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:ems="10"
-            android:text="Graph"
+            android:text="Hours Slept vs Days"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="#000"
-            android:textSize="35sp" />
+            android:textSize="20sp" />
 
         <!-- Might change to multiple graphs later
              Testing BarChart first -->

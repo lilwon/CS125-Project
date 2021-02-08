@@ -44,7 +44,7 @@ public class Dashboard extends AppCompatActivity {
         // Setting up Adapter to link
         pagerAdapter = new PagerAdapter(getSupportFragmentManager());
         pagerAdapter.addFragment(new MainFragment(), "Main");
-        pagerAdapter.addFragment(new GraphFragment(), "Graph");
+        pagerAdapter.addFragment(new GraphFragment(), "Activity");
 
         viewPager.setAdapter(pagerAdapter);
         tab.setupWithViewPager(viewPager);
