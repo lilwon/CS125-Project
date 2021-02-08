@@ -8,8 +8,10 @@
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
 
+       <!-- Can remove this and use graph method for Title instead-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,6 +21,13 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="#000"
             android:textSize="35sp" />
+
+        <!-- Might change to multiple graphs later
+             Testing BarChart first -->
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barChart"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
 
     </LinearLayout>
 
