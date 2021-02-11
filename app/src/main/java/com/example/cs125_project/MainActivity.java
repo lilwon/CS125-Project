@@ -150,6 +150,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                    //startActivity(new Intent(MainActivity.this, UserInfo.class));
+
                 }
                 else
                     Toast.makeText(MainActivity.this, "Failed to register! Try again", Toast.LENGTH_LONG).show();

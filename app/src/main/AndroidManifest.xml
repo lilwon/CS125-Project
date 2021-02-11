@@ -11,6 +11,7 @@
         android:theme="@style/Theme.CS125Project">
         <activity android:name=".ProfileActivity"></activity>
         <activity android:name=".RegisterUser" />
+        <activity android:name=".UserInfo" />
         <activity android:name=".Dashboard" />
         <activity android:name=".sleep_activity" />
         <activity android:name=".sleep_activity2" />

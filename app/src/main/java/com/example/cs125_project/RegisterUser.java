@@ -106,7 +106,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
-                            User user = new User(fullname, age, dob, email);
+                            User user = new User(fullname, age, dob, email, password);
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -127,6 +127,9 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                         }
                     }
                 });
+
+       startActivity(new Intent(RegisterUser.this, UserInfo.class));
+
 
     }
 }
