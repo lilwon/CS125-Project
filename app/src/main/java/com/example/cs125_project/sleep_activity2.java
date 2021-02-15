@@ -44,7 +44,7 @@ public class sleep_activity2 extends AppCompatActivity {
     }
 
     public void openSleepActivity2() {
-        Intent i = new Intent(this, Dashboard.class);
+        Intent i = new Intent(this, SleepFeedback.class);
         startActivity(i);
     }
 
