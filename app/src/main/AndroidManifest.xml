@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CS125Project">
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".ActiveLevelFeedback"></activity>
+        <activity android:name=".SleepFeedback" />
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".RegisterUser" />
         <activity android:name=".UserInfo" />
         <activity android:name=".Dashboard" />
