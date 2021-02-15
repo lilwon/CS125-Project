@@ -106,8 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void ClickHome(View view) {
-        //closeDrawer(dl);
-        redirectActivity(this, ProfileActivity.class);
+        closeDrawer(dl);
     }
 
     public void ClickDashboard(View view) {
@@ -183,20 +182,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         editor.commit();
                     }
 
-                    /*
                     User u = new User();
                     u.email = email;
 
-                    Intent i = new Intent(MainActivity.this, ProfileActivity.class);
+                    Intent i = new Intent(getApplicationContext(), ProfileActivity.class);
                     // give ProfileActivity class the email from MainActivity/login
                     i.putExtra("email", u.email);
 
                     Log.v("Info", email);
                     startActivity(i);
+                    // startActivity(new Intent(MainActivity.this, ProfileActivity);
                     //startActivity(new Intent(MainActivity.this, UserInfo.class));
-                    */
-                    startActivity(new Intent(MainActivity.this, Dashboard.class));
-                    //startActivity(new Intent(MainActivity.this, ProfileActivity.class));
                 }
                 else
                     Toast.makeText(MainActivity.this, "Failed to register! Try again", Toast.LENGTH_LONG).show();
@@ -205,4 +201,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
+
 }

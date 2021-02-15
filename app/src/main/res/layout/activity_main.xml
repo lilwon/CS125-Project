@@ -15,9 +15,10 @@
 
         <!-- Remove after implementing another Activity
              Since this is now login page -->
+        <!--
         <include
             layout="@layout/main_toolbar"/>
-
+        -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="274dp"
