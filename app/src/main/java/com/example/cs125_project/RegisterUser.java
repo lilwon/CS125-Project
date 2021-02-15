@@ -101,6 +101,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
+        // Writes new users to Firebase
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override

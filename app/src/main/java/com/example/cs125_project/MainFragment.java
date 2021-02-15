@@ -31,6 +31,9 @@ public class MainFragment extends Fragment {
     // Sleep activity button
     private Button enterSleepActivity;
 
+    // User Profile/Settings
+    private Button userProfileBtn;
+
     public MainFragment() {
         // Required empty public constructor
     }
@@ -71,9 +74,9 @@ public class MainFragment extends Fragment {
         return view;
     }
 
-    // Open Sleep Activity
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        // Open Sleep activity
         enterSleepActivity = (Button) getView().findViewById(R.id.enterSleepActivity);
         enterSleepActivity.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -81,6 +84,15 @@ public class MainFragment extends Fragment {
                 openSleepActivity();
             }
         });
+
+        // Open User Profile/Settings
+       userProfileBtn = (Button) getView().findViewById(R.id.userProfile);
+       userProfileBtn.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               openUserInfoActivity();
+           }
+       });
     }
 
     public void openSleepActivity() {
@@ -88,4 +100,8 @@ public class MainFragment extends Fragment {
         startActivity(i);
     }
 
+    public void openUserInfoActivity() {
+        Intent i = new Intent(getContext(), UserInfo.class);
+        startActivity(i);
+    }
 }

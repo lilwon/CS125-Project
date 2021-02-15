@@ -9,6 +9,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.Gravity;
 import android.view.View;
@@ -22,6 +24,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 // More likely to be Login screen
 // May need to "bypass" to directly go to Dashboard or something
@@ -179,7 +182,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         editor.commit();
                     }
 
-                    startActivity(new Intent(MainActivity.this, Dashboard.class));
+                    User u = new User();
+                    u.email = email;
+
+                    Intent i = new Intent(getApplicationContext(), ProfileActivity.class);
+                    // give ProfileActivity class the email from MainActivity/login
+                    i.putExtra("email", u.email);
+
+                    Log.v("Info", email);
+                    startActivity(i);
                     // startActivity(new Intent(MainActivity.this, ProfileActivity);
                     //startActivity(new Intent(MainActivity.this, UserInfo.class));
                 }

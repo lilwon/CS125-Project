@@ -35,6 +35,7 @@
         tools:ignore="VectorDrawableCompat" />
 
     <EditText
+        android:id="@+id/avg_hour_sleep"
         android:layout_width="298dp"
         android:layout_height="48dp"
         android:ems="10"
