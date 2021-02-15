@@ -7,11 +7,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +33,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button login;
     private FirebaseAuth mAuth;
 
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
+    boolean loginCheck;
+    CheckBox saveLoginCheck;
+
     DrawerLayout dl;
 
     @Override
@@ -47,8 +55,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         editTextEmail = (EditText) findViewById(R.id.emailLogin);
         editTextPassword = (EditText) findViewById(R.id.passwordLogin);
+        // Get shared pref
+        sharedPreferences = getSharedPreferences("Login", MODE_PRIVATE);
+        saveLoginCheck = (CheckBox)findViewById(R.id.rememberCheckBox);
+        editor = sharedPreferences.edit();
+
+        loginCheck = sharedPreferences.getBoolean("saveLogin", true);
+
+        if ( loginCheck == true ) {
+
+            editTextEmail.setText(sharedPreferences.getString("username", null));
+            editTextPassword.setText(sharedPreferences.getString("password", null));
+        }
 
         mAuth = FirebaseAuth.getInstance();
+
+
 
         /* Temp hide
         sleepBtn = (Button) findViewById(R.id.sleepBtn);
@@ -149,9 +171,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    startActivity(new Intent(MainActivity.this, ProfileActivity.class));
-                    //startActivity(new Intent(MainActivity.this, UserInfo.class));
+                    // Save login information for current phone/user so dont need to constantly put username/pw
+                    if ( saveLoginCheck.isChecked() ) {
+                        editor.putBoolean("saveLogin", true);
+                        editor.putString("username", email);
+                        editor.putString("password", password);
+                        editor.commit();
+                    }
 
+                    startActivity(new Intent(MainActivity.this, Dashboard.class));
+                    // startActivity(new Intent(MainActivity.this, ProfileActivity);
+                    //startActivity(new Intent(MainActivity.this, UserInfo.class));
                 }
                 else
                     Toast.makeText(MainActivity.this, "Failed to register! Try again", Toast.LENGTH_LONG).show();
