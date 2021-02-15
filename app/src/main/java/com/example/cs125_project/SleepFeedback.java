@@ -42,9 +42,8 @@ public class SleepFeedback extends AppCompatActivity {
         startActivity(i);
     }
 
-    //Redirect to DashBoard For Now
     public void nextto_ExeciseFeedBack(){
-        Intent i = new Intent(this, Dashboard.class);
+        Intent i = new Intent(this, ActiveLevelFeedback.class);
         startActivity(i);
     }
 }
