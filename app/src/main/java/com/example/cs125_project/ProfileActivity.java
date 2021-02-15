@@ -2,7 +2,10 @@ package com.example.cs125_project;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.renderscript.Sampler;
@@ -27,6 +30,8 @@ public class ProfileActivity extends AppCompatActivity {
     private static final String USERS = "Users";
     private String curUser;
 
+    DrawerLayout dl;
+
     // TAG for errors
     private final String TAG = this.getClass().getName().toUpperCase();
 
@@ -34,6 +39,8 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        dl = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         // Get intent from MainActivity/login
         Intent i = getIntent();
@@ -81,10 +88,35 @@ public class ProfileActivity extends AppCompatActivity {
                 openSleepActivity();
             }
         });
-
     }
     public void openSleepActivity() {
         Intent i = new Intent(this, sleep_activity.class);
         startActivity(i);
+    }
+
+    // Below is for Navigation Drawer
+    public void ClickMenu(View view) {
+        MainActivity.openDrawer(dl);
+    }
+
+    public void ClickLogo(View view) {
+        MainActivity.closeDrawer(dl);
+    }
+
+    // ProfileActivity is now Home
+    public void ClickHome(View view) {
+        MainActivity.closeDrawer(dl);
+    }
+
+    public void ClickDashboard(View view) {
+        MainActivity.redirectActivity(this, Dashboard.class);
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        MainActivity.closeDrawer(dl);
     }
 }
