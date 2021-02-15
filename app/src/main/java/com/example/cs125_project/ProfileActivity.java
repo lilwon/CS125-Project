@@ -2,6 +2,7 @@ package com.example.cs125_project;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,14 +20,15 @@ import com.google.firebase.database.ValueEventListener;
 
 
 public class ProfileActivity extends AppCompatActivity {
-    private Button sleepBtn;
+    // Adding another DL
+    DrawerLayout dl;
 
-    private TextView usernameText;
+    private Button sleepBtn;
 
     // How users labeled in Firebase DB
     private static final String USERS = "Users";
     private String curUser;
-
+    private TextView usernameText;
     // TAG for errors
     private final String TAG = this.getClass().getName().toUpperCase();
 
@@ -34,6 +36,8 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        dl.findViewById(R.id.drawer_layout);
 
         // Get intent from MainActivity/login
         Intent i = getIntent();
@@ -83,8 +87,33 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
     }
+    // Below is for Navigation Drawer
+    public void ClickMenu(View view) {
+        MainActivity.openDrawer(dl);
+    }
+
+    public void ClickLogo(View view) {
+        MainActivity.closeDrawer(dl);
+    }
+
+    public void ClickHome(View view) {
+        //MainActivity.redirectActivity(this, Dashboard.class);
+    }
+
+    public void ClickDashboard(View view) {
+        MainActivity.redirectActivity(this, Dashboard.class);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MainActivity.closeDrawer(dl);
+    }
+
     public void openSleepActivity() {
         Intent i = new Intent(this, sleep_activity.class);
         startActivity(i);
     }
+
+
 }

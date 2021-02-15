@@ -62,6 +62,7 @@ public class Dashboard extends AppCompatActivity {
 
     public void ClickHome(View view) {
         MainActivity.redirectActivity(this, MainActivity.class);
+        // MainActivity.redirectActivity(this, ProfileActivity.class);
     }
 
     public void ClickDashboard(View view) {
