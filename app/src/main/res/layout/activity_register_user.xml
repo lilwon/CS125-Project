@@ -7,13 +7,27 @@
     android:layout_height="match_parent"
     tools:context=".RegisterUser">
 
+    <TextView
+        android:id="@+id/reginfoBanner"
+        android:layout_width="match_parent"
+        android:layout_height="100sp"
+        android:gravity="center_horizontal"
+        android:text="Registration Information"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/fullnameInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/fullnameInput"
         android:layout_width="317dp"
         android:layout_height="64dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Full Name"
+        android:hint="Full Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.473"
@@ -21,28 +35,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.303" />
 
-    <TextView
-        android:id="@+id/reginfoBanner"
-        android:layout_width="339dp"
-        android:layout_height="112dp"
-        android:text="Registration Information"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/fullnameInput"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.608" />
-
     <EditText
         android:id="@+id/ageInput"
         android:layout_width="317dp"
         android:layout_height="64dp"
         android:ems="10"
+        android:hint="Age"
         android:inputType="textPersonName"
-        android:text="Age"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fullnameInput"
         app:layout_constraintVertical_bias="0.0" />
@@ -52,10 +54,11 @@
         android:layout_width="317dp"
         android:layout_height="64dp"
         android:ems="10"
+        android:hint="Date of Birth (MM/DD/YYYY)"
         android:inputType="textPersonName"
-        android:text=" Date of Birth (MM/DD/YYYY)"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ageInput"
         app:layout_constraintVertical_bias="0.0" />
@@ -66,7 +69,7 @@
         android:layout_height="64dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Email"
+        android:hint="Email"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.473"
@@ -79,8 +82,8 @@
         android:layout_width="317dp"
         android:layout_height="64dp"
         android:ems="10"
+        android:hint="Password"
         android:inputType="textPersonName"
-        android:text="Password"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.473"
@@ -92,13 +95,26 @@
         android:id="@+id/registeruserBtn"
         android:layout_width="200dp"
         android:layout_height="64dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginBottom="37dp"
         android:text="Register User"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/signInView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordregInput"
-        app:layout_constraintVertical_bias="0.265" />
+        app:layout_constraintVertical_bias="0.393" />
+
+    <TextView
+        android:id="@+id/signInView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Already a user? Sign in"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordregInput" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

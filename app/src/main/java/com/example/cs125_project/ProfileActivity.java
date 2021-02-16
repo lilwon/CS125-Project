@@ -67,7 +67,9 @@ public class ProfileActivity extends AppCompatActivity {
                     if ( ds.child("email").getValue().equals(curUser) ) {
                         // get the user name from the Firebase db
                         // usernameText.setText(ds.child("fullname").getValue(String.class));
-                        userFullName = ds.child("fullname").getValue(String.class);
+
+                        // somehow Database value of fullname changed to fullName..
+                        userFullName = ds.child("fullName").getValue(String.class);
                         break;
                     }
                 }

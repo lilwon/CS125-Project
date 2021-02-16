@@ -18,8 +18,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.w3c.dom.Text;
+
 public class RegisterUser extends AppCompatActivity implements View.OnClickListener{
-    private TextView regInfo, registerUser;
+    private TextView regInfo, registerUser, signInTextView;
     private EditText editTextFullName, editTextAge, editTextDOB, editTextEmail, editTextPassword;
 
     private FirebaseAuth mAuth;
@@ -32,6 +34,9 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
 
         regInfo = (TextView) findViewById(R.id.reginfoBanner);
         regInfo.setOnClickListener(this);
+
+        signInTextView = (TextView) findViewById(R.id.signInView);
+        signInTextView.setOnClickListener(this);
 
         registerUser = (Button) findViewById(R.id.registeruserBtn);
         registerUser.setOnClickListener(this);
@@ -49,10 +54,13 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.reginfoBanner:
-                startActivity(new Intent(this, MainActivity.class));
+                finish(); // return to Activity
                 break;
             case R.id.registeruserBtn:
                 regUser();
+                break;
+            case R.id.signInView:
+                finish(); // return to sign in page
                 break;
         }
 
