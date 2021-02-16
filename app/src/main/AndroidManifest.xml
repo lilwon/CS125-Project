@@ -17,6 +17,7 @@
         <activity android:name=".Dashboard" />
         <activity android:name=".sleep_activity" />
         <activity android:name=".sleep_activity2" />
+        <activity android:name=".SleepRecommendation" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

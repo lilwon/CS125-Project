@@ -32,8 +32,8 @@ public class ActiveLevelFeedback extends AppCompatActivity {
         activefb_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String rating_num = String.valueOf(ratingBar.getRating());
-                Toast.makeText(ActiveLevelFeedback.this, rating_num+"", Toast.LENGTH_SHORT).show();
+             //   String rating_num = String.valueOf(ratingBar.getRating());
+             //   Toast.makeText(ActiveLevelFeedback.this, rating_num+"", Toast.LENGTH_SHORT).show();
                 nextto_SleepStorage();
             }
         });
@@ -47,7 +47,7 @@ public class ActiveLevelFeedback extends AppCompatActivity {
     //Redirect to DashBoard For Now
     //Goal: Direct To Sleep Storage Page Contain Previously Set Schedules
     public void nextto_SleepStorage() {
-        Intent i = new Intent(this, Dashboard.class);
+        Intent i = new Intent(this, SleepRecommendation.class);
         startActivity(i);
     }
 }

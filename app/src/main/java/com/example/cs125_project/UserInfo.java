@@ -18,6 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 public class UserInfo extends AppCompatActivity  {
 
     private Button user_info_next_button;
+    private Button user_info_back_button;
 
 
     @Override
@@ -32,10 +33,23 @@ public class UserInfo extends AppCompatActivity  {
                 openSleepActivity2();
             }
         });
+
+        user_info_back_button = (Button) findViewById(R.id.user_info_back_button);
+        user_info_back_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                openDashboard();
+            }
+        });
     }
 
     public void openSleepActivity2() {
         Intent i = new Intent(this, sleep_activity2.class);
+        startActivity(i);
+    }
+
+    public void openDashboard() {
+        Intent i = new Intent(this, Dashboard.class);
         startActivity(i);
     }
 

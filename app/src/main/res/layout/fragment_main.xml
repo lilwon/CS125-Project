@@ -31,7 +31,7 @@
             android:layout_marginBottom="15dp"
             android:clickable="true"
             android:linksClickable="false"
-            android:text="Enter Sleep Activity"
+            android:text="Get Sleep Recommendation"
             android:textColor="#000000"
             app:backgroundTint="#FFFFFF"/>
 
@@ -41,7 +41,7 @@
             android:layout_height="70dp"
             android:layout_gravity="center"
             android:layout_marginBottom="15dp"
-            android:text="My Sleep Recommendation"
+            android:text="Previous Recommendations"
             android:textColor="#000000"
             app:backgroundTint="#FFFFFF" />
 
