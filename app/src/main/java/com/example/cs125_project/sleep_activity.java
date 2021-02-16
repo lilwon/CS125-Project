@@ -25,10 +25,6 @@ public class sleep_activity extends AppCompatActivity {
 
         TimePicker simpleTimePicker=(TimePicker)findViewById(R.id.simpleTimePicker); //initiate a time picker
 
-        // Time is stored as 24H Military time
-        hour1 = simpleTimePicker.getCurrentHour();
-        minute1 = simpleTimePicker.getCurrentMinute();
-
         back_button = (Button) findViewById(R.id.back_button);
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,13 +34,17 @@ public class sleep_activity extends AppCompatActivity {
         });
 
 
-        Log.v("currentHour", String.valueOf(hour1));
-        Log.v("currentMinute", String.valueOf(minute1));
+
 
         next_button = (Button) findViewById(R.id.next_button);
         next_button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                // Time is stored as 24H Military time
+
+                hour1 = simpleTimePicker.getCurrentHour();
+                minute1 = simpleTimePicker.getCurrentMinute();
+
                 openSleepActivity2(v);
             }
         });
@@ -52,9 +52,14 @@ public class sleep_activity extends AppCompatActivity {
 
     public void openSleepActivity2(View view) {
         Intent i = new Intent(this, sleep_activity2.class);
+        Log.v("currentHour", String.valueOf(hour1));
+        Log.v("currentMinute", String.valueOf(minute1));
 
-        i.putExtra("hourInput1", hour1);
-        i.putExtra("minuteInput1", minute1);
+        // Create a Bundle so we can use putExtras (vs putExtra)
+        Bundle sendData = new Bundle();
+        sendData.putInt("hrInput1", hour1);
+        sendData.putInt("minInput1", minute1);
+        i.putExtras(sendData);
 
         startActivity(i);
     }
