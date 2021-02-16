@@ -14,6 +14,9 @@ public class sleep_activity2 extends AppCompatActivity {
     private Button next_button2;
     private Button back_button2;
 
+    private int hour2;
+    private int minute2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
