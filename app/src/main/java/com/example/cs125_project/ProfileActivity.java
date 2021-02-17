@@ -69,7 +69,8 @@ public class ProfileActivity extends AppCompatActivity {
                         // usernameText.setText(ds.child("fullname").getValue(String.class));
 
                         // somehow Database value of fullname changed to fullName..
-                        userFullName = ds.child("fullName").getValue(String.class);
+                        //Update: Should be fixed - Vivian
+                        userFullName = ds.child("fullname").getValue(String.class);
                         break;
                     }
                 }
