@@ -12,6 +12,7 @@ import android.widget.Toast;
 public class SleepRecommendation extends AppCompatActivity {
     private Button rec_back_button;
 
+    private Button returnBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +27,21 @@ public class SleepRecommendation extends AppCompatActivity {
             }
         });
 
+        returnBtn = (Button) findViewById(R.id.returnDashboardBtn);
+        returnBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { returnToDashboard(); }
+        });
+
     }
 
     public void backto_ActiveLevel() {
         Intent i = new Intent(this, ActiveLevelFeedback.class);
+        startActivity(i);
+    }
+
+    public void returnToDashboard() {
+        Intent i = new Intent(this, Dashboard.class);
         startActivity(i);
     }
 
