@@ -9,6 +9,10 @@ import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class ActiveLevelFeedback extends AppCompatActivity {
     RatingBar ratingBar;
     Button activefb_back;
@@ -50,4 +54,5 @@ public class ActiveLevelFeedback extends AppCompatActivity {
         Intent i = new Intent(this, SleepRecommendation.class);
         startActivity(i);
     }
+
 }
