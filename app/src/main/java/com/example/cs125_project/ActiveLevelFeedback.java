@@ -15,11 +15,16 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class ActiveLevelFeedback extends AppCompatActivity {
     RatingBar ratingBar;
     Button activefb_back;
     Button activefb_next;
     public float rating;
+    String currentDate;
 
     // get the current user
     private static final String USERS = "Users";
@@ -76,6 +81,12 @@ public class ActiveLevelFeedback extends AppCompatActivity {
         startActivity(i);
     }
 
+    private String getDateTime() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
+
     public void storeToDatabase() {
 
         // Get current user thats logged in
@@ -85,10 +96,11 @@ public class ActiveLevelFeedback extends AppCompatActivity {
 
         // WRITING data to a user
         // Need to make it dynamic to store in Firebase
-        // uniqueDate would be the day they slept
+        // currentDate would be the day they slept
         // And then from there you would add the hours slept
-        db.child("Users").child(useruid).child("activeRating").setValue("dateValue"); // MUST CHANGE uniqueDate for every new entry
-        db.child("Users").child(useruid).child("activeRating").child("uniqueDate").child("activeRating").setValue(rating);
+        // thinking there may be a more efficient way to store this data...
+        currentDate = getDateTime();
+        db.child("Users").child(useruid).child("activeRating").push().child(currentDate).child("activeRating").setValue(rating);
 
     }
 
