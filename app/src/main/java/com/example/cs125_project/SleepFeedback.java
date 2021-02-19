@@ -15,11 +15,16 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class SleepFeedback extends AppCompatActivity {
     RatingBar ratingBar;
     Button sleepfb_back;
     Button sleepfb_next;
     public float rating;
+    String currentDate;
 
     // get the current user
     private static final String USERS = "Users";
@@ -72,6 +77,12 @@ public class SleepFeedback extends AppCompatActivity {
         startActivity(i);
     }
 
+    private String getDateTime() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
+
     public void storeToDatabase() {
 
         // Get current user thats logged in
@@ -83,8 +94,8 @@ public class SleepFeedback extends AppCompatActivity {
         // Need to make it dynamic to store in Firebase
         // uniqueDate would be the day they slept
         // And then from there you would add the hours slept
-        db.child("Users").child(useruid).child("sleepRating").setValue("dateValue"); // MUST CHANGE uniqueDate for every new entry
-        db.child("Users").child(useruid).child("sleepRating").child("uniqueDate").child("sleepRating").setValue(rating);
+        currentDate = getDateTime();
+        db.child("Users").child(useruid).child("sleepRating").push().child(currentDate).child("sleepRating").setValue(rating);
 
     }
 }

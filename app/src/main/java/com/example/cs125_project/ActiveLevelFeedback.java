@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
@@ -11,12 +12,20 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class ActiveLevelFeedback extends AppCompatActivity {
     RatingBar ratingBar;
     Button activefb_back;
     Button activefb_next;
+    public float rating;
+
+    // get the current user
+    private static final String USERS = "Users";
+
+    // Lets try to write to Firebase DB
+    private DatabaseReference db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +60,36 @@ public class ActiveLevelFeedback extends AppCompatActivity {
     //Redirect to DashBoard For Now
     //Goal: Direct To Sleep Storage Page Contain Previously Set Schedules
     public void nextto_SleepStorage() {
+        rating = ratingBar.getRating();
+
         Intent i = new Intent(this, SleepRecommendation.class);
+
+        Log.v("activeRating", String.valueOf(rating));
+
+        // Create a Bundle so we can use putExtras (vs putExtra)
+        Bundle sendData = new Bundle();
+        sendData.putFloat("activeRating", rating);
+        i.putExtras(sendData);
+
+        storeToDatabase();
+
         startActivity(i);
+    }
+
+    public void storeToDatabase() {
+
+        // Get current user thats logged in
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String useruid = user.getUid(); // get their unique id
+        db = FirebaseDatabase.getInstance().getReference(); // now change that user's Firebase data
+
+        // WRITING data to a user
+        // Need to make it dynamic to store in Firebase
+        // uniqueDate would be the day they slept
+        // And then from there you would add the hours slept
+        db.child("Users").child(useruid).child("activeRating").setValue("dateValue"); // MUST CHANGE uniqueDate for every new entry
+        db.child("Users").child(useruid).child("activeRating").child("uniqueDate").child("activeRating").setValue(rating);
+
     }
 
 }
