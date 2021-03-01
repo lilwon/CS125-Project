@@ -87,7 +87,8 @@ public class ActiveLevelFeedback extends AppCompatActivity {
         return dateFormat.format(date);
     }
 
-    public void storeToDatabase() {
+    //ORIGINAL
+    /*public void storeToDatabase() {
 
         // Get current user thats logged in
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -101,6 +102,27 @@ public class ActiveLevelFeedback extends AppCompatActivity {
         // thinking there may be a more efficient way to store this data...
         currentDate = getDateTime();
         db.child("Users").child(useruid).child("activeRating").push().child(currentDate).child("activeRating").setValue(rating);
+
+    }*/
+
+    //By: Vivian
+    //Only writing the current feedback
+    //Plan to bundle up active_level feedback, sleep_level feedback, hours, data into one node
+
+    public void storeToDatabase() {
+
+        // Get current user thats logged in
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String useruid = user.getUid(); // get their unique id
+        db = FirebaseDatabase.getInstance().getReference(); // now change that user's Firebase data
+
+        // WRITING data to a user
+        // Need to make it dynamic to store in Firebase
+        // currentDate would be the day they slept
+        // And then from there you would add the hours slept
+        // thinking there may be a more efficient way to store this data...
+        //currentDate = getDateTime();
+        db.child("Users").child(useruid).child("activeRating").setValue(rating);
 
     }
 

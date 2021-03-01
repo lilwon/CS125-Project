@@ -49,7 +49,7 @@ public class SleepFeedback extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String rating_num = String.valueOf(ratingBar.getRating());
-                Toast.makeText(SleepFeedback.this, rating_num+"", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SleepFeedback.this, rating_num+"", Toast.LENGTH_SHORT).show();
                 nextto_ExeciseFeedBack();
             }
         });
@@ -83,7 +83,8 @@ public class SleepFeedback extends AppCompatActivity {
         return dateFormat.format(date);
     }
 
-    public void storeToDatabase() {
+    //ORIGINAL
+    /*public void storeToDatabase() {
 
         // Get current user thats logged in
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -96,6 +97,24 @@ public class SleepFeedback extends AppCompatActivity {
         // And then from there you would add the hours slept
         currentDate = getDateTime();
         db.child("Users").child(useruid).child("sleepRating").push().child(currentDate).child("sleepRating").setValue(rating);
+
+    }*/
+
+    //By: Vivian
+    //Only writing the current feedback
+    //Plan to bundle up active_level feedback, sleep_level feedback, hours, data into one node
+    public void storeToDatabase() {
+
+        // Get current user thats logged in
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String useruid = user.getUid(); // get their unique id
+        db = FirebaseDatabase.getInstance().getReference(); // now change that user's Firebase data
+
+        // WRITING data to a user
+        // Need to make it dynamic to store in Firebase
+        // uniqueDate would be the day they slept
+        // And then from there you would add the hours slept
+        db.child("Users").child(useruid).child("sleepRating").setValue(rating);
 
     }
 }
