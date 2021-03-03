@@ -49,7 +49,7 @@ public class SleepFeedback extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String rating_num = String.valueOf(ratingBar.getRating());
-                //Toast.makeText(SleepFeedback.this, rating_num+"", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SleepFeedback.this, rating_num+"", Toast.LENGTH_SHORT).show();
                 nextto_ExeciseFeedBack();
             }
         });

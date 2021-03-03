@@ -8,10 +8,10 @@
     android:id="@+id/drawer_layout"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <!-- Remove after implementing another Activity
              Since this is now login page -->
@@ -19,67 +19,94 @@
         <include
             layout="@layout/main_toolbar"/>
         -->
+
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="274dp"
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
             android:gravity="center"
-            android:text="Welcome!"
+            android:text="Welcome To Sleep Tracker!"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/emailLogin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/emailLogin"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <EditText
+            android:id="@+id/emailLogin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:singleLine="false"
             android:textSize="25sp"
-            android:textStyle="bold"/>
+            app:layout_constraintBottom_toTopOf="@+id/passwordLogin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="511dp"
-            android:orientation="vertical">
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="54dp"
+            android:layout_marginBottom="54dp"
+            app:layout_constraintBottom_toBottomOf="@+id/passwordLogin"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/emailLogin" />
+
+        <EditText
+            android:id="@+id/passwordLogin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toTopOf="@+id/rememberCheckBox"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailLogin" />
 
 
-            <EditText
-                android:id="@+id/emailLogin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:singleLine="false"
-                android:hint="Email"
-                android:textSize="25sp" />
+        <CheckBox
+            android:id="@+id/rememberCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:text="Remember Me"
+            app:layout_constraintBottom_toTopOf="@+id/loginBtn"
+            app:layout_constraintStart_toStartOf="@+id/passwordLogin"
+            app:layout_constraintTop_toBottomOf="@+id/passwordLogin" />
 
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="30dp" />
 
-            <EditText
-                android:id="@+id/passwordLogin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:textSize="25sp"
-                android:hint="Password"/>
+        <Button
+            android:id="@+id/loginBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="LOGIN"
+            app:backgroundTint="@color/purple_500"
+            app:layout_constraintBottom_toTopOf="@+id/registerBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rememberCheckBox" />
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp" >
+        <Button
+            android:id="@+id/registerBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="188dp"
+            android:text="Register"
+            app:backgroundTint="@color/purple_500"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
 
-                <CheckBox
-                    android:id="@+id/rememberCheckBox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Remember Me" />
-            </FrameLayout>
-
-            <Button
-                android:id="@+id/loginBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="LOGIN"
-                app:backgroundTint="#9C27B0" />
-
-            <Button
-                android:id="@+id/registerBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Register"
-                app:backgroundTint="#9C27B0" />
-
-        </LinearLayout>
 
         <!--- Hide temporariliy for Login Screen
         <Button
@@ -89,7 +116,7 @@
             android:text="Open Sleep Setting" />
          -->
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <RelativeLayout
         android:layout_width="300dp"

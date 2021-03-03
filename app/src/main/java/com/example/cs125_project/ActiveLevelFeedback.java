@@ -50,8 +50,8 @@ public class ActiveLevelFeedback extends AppCompatActivity {
         activefb_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             //   String rating_num = String.valueOf(ratingBar.getRating());
-             //   Toast.makeText(ActiveLevelFeedback.this, rating_num+"", Toast.LENGTH_SHORT).show();
+                String rating_num = String.valueOf(ratingBar.getRating());
+                Toast.makeText(ActiveLevelFeedback.this, rating_num+"", Toast.LENGTH_SHORT).show();
                 nextto_SleepStorage();
             }
         });

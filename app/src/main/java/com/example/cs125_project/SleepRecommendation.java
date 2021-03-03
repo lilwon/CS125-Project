@@ -7,9 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,7 +22,8 @@ public class SleepRecommendation extends AppCompatActivity {
 
     private Button returnBtn;
 
-    TextView a,b,c,d,e;
+    //Initialize all recommendations
+    TextView best1,best2,best3,bet1,bet2,bet3,mod1,mod2,mod3;
 
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String userid = user.getUid();
@@ -36,26 +35,50 @@ public class SleepRecommendation extends AppCompatActivity {
         setContentView(R.layout.activity_sleep_recommendation);
 
         //Display activity/sleep levels
-        a = (TextView)findViewById(R.id.active_level_view);
-        b = (TextView)findViewById(R.id.sleep_level_view);
-        c = (TextView)findViewById(R.id.rec_hours_view);        //"Best" View
-        d = (TextView)findViewById(R.id.rec_hrs_view2);         //"Better" View
-        e = (TextView)findViewById(R.id.rec_hrs_view3);         //"Moderate" View
+        best1 = (TextView)findViewById(R.id.best_view1);
+        best2 = (TextView)findViewById(R.id.best_view2);
+        best3 = (TextView)findViewById(R.id.best_view3);
+        bet1 = (TextView)findViewById(R.id.better_view1);
+        bet2 = (TextView)findViewById(R.id.better_view2);
+        bet3 = (TextView)findViewById(R.id.better_view3);
+        mod1 = (TextView)findViewById(R.id.mod_view1);
+        mod2 = (TextView)findViewById(R.id.mod_view2);
+        mod3 = (TextView)findViewById(R.id.mod_view3);
+        //a = (TextView)findViewById(R.id.active_level_view);
+        //b = (TextView)findViewById(R.id.sleep_level_view);
 
         reff.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                String active = snapshot.child("activeRating").getValue().toString();
-                String sleep = snapshot.child("sleepRating").getValue().toString();
+                //Get info from Firebase
 
+                //String active = snapshot.child("activeRating").getValue().toString();
+                //String sleep = snapshot.child("sleepRating").getValue().toString();
                 String hours_slept = snapshot.child("hourSlept").child("uniqueDate").child("hours").getValue().toString();
                 String age = snapshot.child("age").getValue().toString();
-                String rec_hours = calculate_sleep(hours_slept, age);
 
-                a.setText(active);
-                b.setText(sleep);
-                c.setText(rec_hours);
+                //Calculate better and moderate sleep hours
+                String rec_hours = calculate_sleep(hours_slept, age);
+                Integer int_better = Integer.parseInt(rec_hours) + 1;
+                Integer int_mod = int_better + 1;
+
+
+
+                //Display text on page
+                //To Do: INCLUDE SLEEP SCHEDULES
+
+                //a.setText(active);
+                //b.setText(sleep);
+                best1.setText(rec_hours + " hours");
+                best2.setText(rec_hours + " hours");
+                best3.setText(rec_hours + " hours");
+                bet1.setText(int_better + " hours");
+                bet2.setText(int_better + " hours");
+                bet3.setText(int_better + " hours");
+                mod1.setText(int_mod + " hours");
+                mod2.setText(int_mod + " hours");
+                mod3.setText(int_mod + " hours");
             }
 
             @Override
