@@ -114,7 +114,8 @@ public class SleepFeedback extends AppCompatActivity {
         // Need to make it dynamic to store in Firebase
         // uniqueDate would be the day they slept
         // And then from there you would add the hours slept
-        db.child("Users").child(useruid).child("sleepRating").setValue(rating);
+        currentDate = getDateTime();
+        db.child("Users").child(useruid).child("hourSlept").child(currentDate).child("sleepRating").setValue(rating);
 
     }
 }

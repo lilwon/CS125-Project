@@ -15,6 +15,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class sleep_activity2 extends AppCompatActivity {
 
     private Button next_button2;
@@ -31,6 +35,8 @@ public class sleep_activity2 extends AppCompatActivity {
     // Data to send to next activity and database
     private int minTime;
     private int hrTime;
+
+    String currentDate;
 
     // get the current user
     private static final String USERS = "Users";
@@ -113,6 +119,11 @@ public class sleep_activity2 extends AppCompatActivity {
         // Probably going to remove using minutes anyways..
     }
 
+    private String getDateTime() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
     public void storeToDatabase() {
         /*
         // Get the current user
@@ -134,9 +145,11 @@ public class sleep_activity2 extends AppCompatActivity {
         // Need to make it dynamic to store in Firebase
         // uniqueDate would be the day they slept
         // And then from there you would add the hours slept
-        db.child("Users").child(useruid).child("hourSlept").child("uniqueDate").setValue("dateValue"); // MUST CHANGE uniqueDate for every new entry
-        db.child("Users").child(useruid).child("hourSlept").child("uniqueDate").child("hours").setValue(hrTime);
+        //db.child("Users").child(useruid).child("hourSlept").child("uniqueDate").setValue("dateValue"); // MUST CHANGE uniqueDate for every new entry
+        //db.child("Users").child(useruid).child("hourSlept").child("uniqueDate").child("hours").setValue(hrTime);
 
+        currentDate = getDateTime();
+        db.child("Users").child(useruid).child("hourSlept").child(currentDate).child("hours").setValue(hrTime);
     }
 
 }

@@ -121,8 +121,8 @@ public class ActiveLevelFeedback extends AppCompatActivity {
         // currentDate would be the day they slept
         // And then from there you would add the hours slept
         // thinking there may be a more efficient way to store this data...
-        //currentDate = getDateTime();
-        db.child("Users").child(useruid).child("activeRating").setValue(rating);
+        currentDate = getDateTime();
+        db.child("Users").child(useruid).child("hourSlept").child(currentDate).child("activeRating").setValue(rating);
 
     }
 

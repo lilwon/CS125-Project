@@ -17,10 +17,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class SleepRecommendation extends AppCompatActivity {
     private Button rec_back_button;
 
     private Button returnBtn;
+
+    private String year;
+    private String month;
+    private String day;
 
     //Initialize all recommendations
     TextView best1,best2,best3,bet1,bet2,bet3,mod1,mod2,mod3;
@@ -51,11 +59,16 @@ public class SleepRecommendation extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                year = getYear();
+                month = getMonth();
+                day = getDay();
+
                 //Get info from Firebase
 
                 //String active = snapshot.child("activeRating").getValue().toString();
                 //String sleep = snapshot.child("sleepRating").getValue().toString();
-                String hours_slept = snapshot.child("hourSlept").child("uniqueDate").child("hours").getValue().toString();
+                //String hours_slept = snapshot.child("hourSlept").child("uniqueDate").child("hours").getValue().toString();
+                String hours_slept = snapshot.child("hourSlept").child(year).child(month).child(day).child("hours").getValue().toString();
                 String age = snapshot.child("age").getValue().toString();
 
                 //Calculate better and moderate sleep hours
@@ -111,6 +124,24 @@ public class SleepRecommendation extends AppCompatActivity {
     public void returnToDashboard() {
         Intent i = new Intent(this, Dashboard.class);
         startActivity(i);
+    }
+
+    private String getYear () {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy");
+        Date yr = new Date();
+        return dateFormat.format(yr);
+    }
+
+    private String getMonth() {
+        DateFormat dateFormat = new SimpleDateFormat("MM");
+        Date month = new Date();
+        return dateFormat.format(month);
+    }
+
+    private String getDay() {
+        DateFormat dateFormat = new SimpleDateFormat("dd");
+        Date d= new Date();
+        return dateFormat.format(d);
     }
 
     //AGE -> HOURS STATS (CDC)
