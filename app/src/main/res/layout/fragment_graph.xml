@@ -17,17 +17,40 @@
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:ems="10"
-            android:text="Hours Slept vs Days"
+            android:text="Hours Slept per Day"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="#000"
-            android:textSize="20sp" />
+            android:textSize="30dp"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Month of March"
+            android:gravity="center"
+            android:textSize="30dp"/>
 
         <!-- Might change to multiple graphs later
              Testing BarChart first -->
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/barChart"
             android:layout_width="match_parent"
-            android:layout_height="300dp" />
+            android:layout_height="404dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Days"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/number_hours"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="20dp" />
 
     </LinearLayout>
 

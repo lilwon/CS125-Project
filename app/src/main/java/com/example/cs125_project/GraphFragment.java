@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Description;
@@ -18,6 +19,9 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -108,6 +112,21 @@ public class GraphFragment extends Fragment {
 
         // create Chart
         createBarChart();
+
+        barChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry e, Highlight h) {
+                TextView hour_text = view.findViewById(R.id.number_hours);
+
+                hour_text.setText(String.valueOf(e.getX()) + " hours slept");
+            }
+
+            @Override
+            public void onNothingSelected() {
+
+            }
+        });
+
         return view;
     }
 
@@ -173,6 +192,7 @@ public class GraphFragment extends Fragment {
         // move xAxis labels on the bottom
         XAxis xAxis = barChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM); // move to bottom
+        xAxis.setTextSize(15f);
         xAxis.setGranularity(1f); // the line-spacing between each bar
         xAxis.setDrawGridLines(false); // remove gridlines
 
@@ -184,6 +204,7 @@ public class GraphFragment extends Fragment {
 
         YAxis leftAxis = barChart.getAxisLeft();
         leftAxis.setGranularity(0.5f);
+        leftAxis.setTextSize(12f);
 
         // Description text
         Description desc = barChart.getDescription();
