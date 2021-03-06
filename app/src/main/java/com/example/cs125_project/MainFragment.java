@@ -34,6 +34,9 @@ public class MainFragment extends Fragment {
     // User Profile/Settings
     private Button userProfileBtn;
 
+    // User Previous Recommendations
+    private Button prevRecs;
+
     public MainFragment() {
         // Required empty public constructor
     }
@@ -93,6 +96,15 @@ public class MainFragment extends Fragment {
                openUserInfoActivity();
            }
        });
+
+        // Open Prev Recommendations
+        prevRecs = (Button) getView().findViewById(R.id.sleepRec);
+        prevRecs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openPrevRecActivity();
+            }
+        });
     }
 
     public void openSleepActivity() {
@@ -102,6 +114,11 @@ public class MainFragment extends Fragment {
 
     public void openUserInfoActivity() {
         Intent i = new Intent(getContext(), UserInfo.class);
+        startActivity(i);
+    }
+
+    public void openPrevRecActivity() {
+        Intent i = new Intent(getContext(), PreviousRecommendations.class);
         startActivity(i);
     }
 }
