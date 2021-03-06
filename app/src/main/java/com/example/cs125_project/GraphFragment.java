@@ -3,8 +3,10 @@ package com.example.cs125_project;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +19,18 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,6 +55,15 @@ public class GraphFragment extends Fragment {
 
     // Declare BarChart as global variable
     BarChart barChart;
+
+    private String year = getYear();
+    private String month = getMonth();
+    private String monthDay = getMonthDay();
+
+    // Reading from Firebase DB
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    String userid = user.getUid();
+    DatabaseReference ref= FirebaseDatabase.getInstance().getReference().child("Users").child(userid).child("hourSlept").child(year).child(month);
 
     public GraphFragment() {
         // Required empty public constructor
@@ -79,6 +100,7 @@ public class GraphFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_graph, container, false);
         // set the view to the bar graph
@@ -90,33 +112,48 @@ public class GraphFragment extends Fragment {
     }
 
     private void createBarChart() {
-        ArrayList<Integer> values = new ArrayList<Integer>();
+        ArrayList<Long> values = new ArrayList<Long>();
         ArrayList<BarEntry> entries = new ArrayList<>();
 
-        // temp add values (this is the number of hours slept)
-        // Random times.. Slept 5 hours for 5 days.
-        for ( int i = 0; i < 5; i++ ) {
-            values.add(i);
-        }
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                values.clear(); // clear to remove previous entries
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    Long hourVal = (Long) ds.child("hours").getValue();
+                    //Log.v("snapshot", String.valueOf(hourVal));
+                    values.add(hourVal);
+                }
 
-        // Add entries to Bar Chart
-        // IMPORTANT! Need to change these to days
-        for (int i = 0; i < values.size(); i++ ) {
-            BarEntry entry = new BarEntry(i, values.get(i).floatValue());
-            entries.add(entry);
-        }
+                // Add entries to Bar Chart
+                entries.clear();
+                int i = 0;
+                for ( DataSnapshot ds : snapshot.getChildren()) {
+                    String dateVal = ds.getKey();
+                    //Log.v("snapshotEntry", String.valueOf(dateVal));
+                    int val = Integer.valueOf(dateVal);
+                    BarEntry entry = new BarEntry(val, values.get(i++).floatValue());
+                    entries.add(entry);
+                }
+                // Now add bar to the View
+                BarDataSet ds = new BarDataSet(entries, "# of hours slept");
 
-        // Now add bar to the View
-        BarDataSet ds = new BarDataSet(entries, "# of hours slept");
+                barDataSetSetting(ds);
+                barChartSetting();
 
-        barDataSetSetting(ds);
-        barChartSetting();
+                // Shows the bar on the screen
+                BarData data = new BarData(ds);
+                barChart.setData(data);
+                barChart.notifyDataSetChanged(); // Used for dynamic data aka Firebase
+                barChart.invalidate(); // redraws the chart
+            }
 
-        // Shows the bar on the screen
-        BarData data = new BarData(ds);
-        barChart.setData(data);
-        barChart.invalidate(); // redraws the chart
-        // barChart.notifyDataSetChanged(); // Used for dynamic data aka Firebase
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     // This controls the VISUALS of the DATASET on the charts/graph
@@ -152,5 +189,25 @@ public class GraphFragment extends Fragment {
         Description desc = barChart.getDescription();
         desc.setEnabled(false); // remove desc from graph
     }
+
+    // get month and year for Firebase db
+    private String getYear () {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy");
+        Date yr = new Date();
+        return dateFormat.format(yr);
+    }
+
+    private String getMonth() {
+        DateFormat dateFormat = new SimpleDateFormat("MM");
+        Date month = new Date();
+        return dateFormat.format(month);
+    }
+
+    private String getMonthDay() {
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd");
+        Date d= new Date();
+        return dateFormat.format(d);
+    }
+
 }
 
