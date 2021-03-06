@@ -78,7 +78,7 @@
         android:id="@+id/prev_recs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:divider="@color/material_blue_grey_800"
+        android:divider="@color/purple_700"
         android:dividerHeight="1dp"
         android:padding="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
