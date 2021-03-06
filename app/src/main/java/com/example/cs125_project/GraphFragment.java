@@ -118,7 +118,7 @@ public class GraphFragment extends Fragment {
             public void onValueSelected(Entry e, Highlight h) {
                 TextView hour_text = view.findViewById(R.id.number_hours);
 
-                hour_text.setText(String.valueOf(e.getX()) + " hours slept");
+                hour_text.setText(String.valueOf(e.getY()) + " hours slept");
             }
 
             @Override
