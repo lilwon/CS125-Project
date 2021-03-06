@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,86 +8,76 @@
     android:id="@+id/drawer_layout"
     tools:context=".PreviousRecommendations">
 
-    <TextView
-        android:id="@+id/basic_info_banner"
-        android:layout_width="244dp"
-        android:layout_height="70dp"
-        android:text="Your Previous Sleep Recommendations:"
-        android:textColor="@color/purple_700"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.814"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.155" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/rec_back_button"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="580dp"
-        android:text="Back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.167"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.533" />
+        <include layout="@layout/main_toolbar" />
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/main_toolbar"
-        android:layout_width="405dp"
-        android:layout_height="46dp"
-        app:layout_constraintBottom_toTopOf="@+id/welcomeBanner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.071" />
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:tint="@color/purple_700"
+            app:srcCompat="@drawable/ic_bed"
+            tools:ignore="VectorDrawableCompat" />
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="70dp"
-        android:layout_height="74dp"
-        android:tint="@color/purple_700"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.114"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.151"
-        app:srcCompat="@drawable/ic_bed"
-        tools:ignore="VectorDrawableCompat" />
+        <TextView
+            android:id="@+id/basic_info_banner"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="Your Previous Sleep Recommendations:"
+            android:textColor="@color/purple_700"
+            android:textSize="25sp"
+            android:gravity="center" />
 
-    <Button
-        android:id="@+id/returnDashboardBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="73dp"
-        android:layout_marginLeft="73dp"
-        android:text="Return"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.223"
-        app:layout_constraintStart_toEndOf="@+id/rec_back_button"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.929" />
+        <ListView
+            android:id="@+id/prev_recs"
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
+            android:divider="@color/purple_700"
+            android:dividerHeight="1dp"
+            android:padding="20dp" />
 
-    <ListView
-        android:id="@+id/prev_recs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:divider="@color/purple_700"
-        android:dividerHeight="1dp"
-        android:padding="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/rec_back_button"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.476" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/rec_back_button"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:text="Back"
+                android:layout_weight="1"/>
+
+            <View
+                android:layout_weight="1"
+                android:layout_height="0dp"
+                android:layout_width="0dp"/>
+
+            <Button
+                android:id="@+id/returnDashboardBtn"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:text="Return"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/white" >
+
+       <include
+           layout="@layout/main_nav_drawer" />
+
+    </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
