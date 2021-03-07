@@ -41,30 +41,19 @@
             android:dividerHeight="1dp"
             android:padding="20dp" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content" >
 
             <Button
-                android:id="@+id/rec_back_button"
-                android:layout_width="30dp"
+                android:id="@+id/back_button"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:text="Back"
-                android:layout_weight="1"/>
+                android:layout_centerInParent="true"
+                android:text="Back" />
 
-            <View
-                android:layout_weight="1"
-                android:layout_height="0dp"
-                android:layout_width="0dp"/>
 
-            <Button
-                android:id="@+id/returnDashboardBtn"
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:text="Return"
-                android:layout_weight="1"/>
-        </LinearLayout>
+        </RelativeLayout>
 
     </LinearLayout>
 
