@@ -43,8 +43,9 @@
             <!-- Best Recommendations -->
             <TextView
                 android:id="@+id/bestLabel"
-                android:layout_width="90dp"
-                android:layout_height="42dp"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginLeft="30dp"
                 android:background="@color/white"
                 android:text="Best"
                 android:textColor="#4CAF50"
@@ -52,21 +53,24 @@
 
             <TextView
                 android:id="@+id/best_view1"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/best_view2"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:gravity="center" />
 
             <TextView
                 android:id="@+id/best_view3"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:gravity="center" />
 
             <View
                 android:layout_width="match_parent"
@@ -76,29 +80,33 @@
             <!-- Better -->
             <TextView
                 android:id="@+id/betterLabel"
-                android:layout_width="90dp"
-                android:layout_height="42dp"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginLeft="30dp"
                 android:text="Better"
                 android:textColor="#8BC34A"
                 android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/better_view1"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/better_view2"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/better_view3"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:gravity="center" />
 
             <View
                 android:layout_width="match_parent"
@@ -108,29 +116,33 @@
             <!-- Moderate -->
             <TextView
                 android:id="@+id/moderateLabel"
-                android:layout_width="87dp"
-                android:layout_height="35dp"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginLeft="30dp"
                 android:text="Moderate"
                 android:textColor="#CDDC39"
                 android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/mod_view1"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/mod_view2"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/mod_view3"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:gravity="center"/>
 
             <View
             android:layout_width="match_parent"
