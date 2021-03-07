@@ -117,7 +117,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static void redirectActivity(Activity activity, Class aClass) {
         Intent i = new Intent(activity, aClass);
 
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        // Set to reoder because giving issues for other Activities
+        i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 
         activity.startActivity(i);
 

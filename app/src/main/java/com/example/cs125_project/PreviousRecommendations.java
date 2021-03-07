@@ -61,10 +61,10 @@ public class PreviousRecommendations extends AppCompatActivity {
     }
 
     public void ClickHome(View view) {
-        MainActivity.redirectActivity(this, Dashboard.class);
+        MainActivity.redirectActivity(this, ProfileActivity.class);
     }
 
-    public void ClickDashBoard(View view) {
+    public void ClickDashboard(View view) {
         MainActivity.redirectActivity(this, Dashboard.class);
     }
 

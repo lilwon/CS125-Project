@@ -2,6 +2,7 @@ package com.example.cs125_project;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -88,7 +89,7 @@ public class UserInfo extends AppCompatActivity  {
         MainActivity.closeDrawer(dl);
     }
     public void ClickHome(View view) {
-        MainActivity.redirectActivity(this, Dashboard.class);
+        MainActivity.redirectActivity(this, ProfileActivity.class);
     }
 
     public void ClickDashboard(View view) {
