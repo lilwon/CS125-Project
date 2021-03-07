@@ -52,24 +52,24 @@ public class UserInfo extends AppCompatActivity  {
         // Activate the drawer layout
         dl = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        // Get average amt of sleep user slept and their ideal amt of sleep
-        avgHrText = (EditText) findViewById(R.id.avg_hour_sleep);
-        idealHrText = (EditText) findViewById(R.id.ideal_sleep);
-
-        // convert to Int
-        String avgHr = avgHrText.getText().toString();
-        String idealHr = idealHrText.getText().toString();
-
-        int avgHrVal = Integer.parseInt(avgHr);
-        int idealHrVal = Integer.parseInt(idealHr);
-
-        // Store vals to DB
-        storeToDatabase(avgHrVal, idealHrVal);
-
         user_info_back_button = (Button) findViewById(R.id.user_info_back_button);
         user_info_back_button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                // Get average amt of sleep user slept and their ideal amt of sleep
+                avgHrText = (EditText) findViewById(R.id.avg_hour_sleep);
+                idealHrText = (EditText) findViewById(R.id.ideal_sleep);
+
+                // convert to Int
+                String avgHr = avgHrText.getText().toString();
+                String idealHr = idealHrText.getText().toString();
+
+                if (!avgHr.isEmpty() && !idealHr.isEmpty() ) {
+                    int avgHrVal = Integer.parseInt(avgHr);
+                    int idealHrVal = Integer.parseInt(idealHr);
+                    // Store vals to DB
+                    storeToDatabase(avgHrVal, idealHrVal);
+                }
                 openDashboard();
             }
         });
