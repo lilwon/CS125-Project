@@ -14,11 +14,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 
 public class ProfileActivity extends AppCompatActivity {
@@ -35,6 +42,15 @@ public class ProfileActivity extends AppCompatActivity {
     // TAG for errors
     private final String TAG = this.getClass().getName().toUpperCase();
 
+    // To Display average hours
+    private TextView avgHrsText;
+
+    private String year = getYear();
+    private String month = getMonth();
+    // Reading data from Firebase
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    String userid = user.getUid();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,13 +66,15 @@ public class ProfileActivity extends AppCompatActivity {
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference userRef = rootRef.child(USERS);
 
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(USERS).child(userid).child("hourSlept").child(year).child(month);
+
         Log.v("CURRENT USER", curUser); // returns the Email of the user
         Log.v("USERID", userRef.getKey()); // the root = Users from Firebase DB
 
         // Changing this TextView
         usernameText = findViewById(R.id.welcomeBanner);
 
-        // Reading from the Firebase db
+        // Reading from the Firebase db for name
         userRef.addValueEventListener(new ValueEventListener() {
             String userFullName;
             @Override
@@ -68,8 +86,6 @@ public class ProfileActivity extends AppCompatActivity {
                         // get the user name from the Firebase db
                         // usernameText.setText(ds.child("fullname").getValue(String.class));
 
-                        // somehow Database value of fullname changed to fullName..
-                        //Update: Should be fixed - Vivian
                         userFullName = ds.child("fullname").getValue(String.class);
                         break;
                     }
@@ -84,6 +100,41 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        avgHrsText =(TextView) findViewById(R.id.avg_hr_sleep);
+        // Calculating average from Firebase data
+        ref.addValueEventListener(new ValueEventListener() {
+            ArrayList<Long> hoursList = new ArrayList<Long>();
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // Get all the values from Database
+                hoursList.clear();
+                for (DataSnapshot ds : snapshot.getChildren() ) {
+                    // getValue only returns Long.. need to change to double?
+                    Long hourVal = (Long) ds.child("hours").getValue();
+                    hoursList.add(hourVal);
+                }
+
+                // MAY NEED TO CHANGE TO DOUBLES LATER
+                // Calculate average
+                Long sum = 0L;
+                for ( Long d : hoursList ) {
+                    sum += d;
+                }
+
+                //Log.v("Sum", String.valueOf(sum));
+                Long avg = sum / hoursList.size();
+                String avgStr = String.valueOf(avg);
+                //Log.v("sum", avgStr);
+
+                // Change text to avg hours
+                avgHrsText.setText(avgStr);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+        /*
         sleepBtn = (Button) findViewById(R.id.sleeptestBtn);
         sleepBtn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -91,6 +142,7 @@ public class ProfileActivity extends AppCompatActivity {
                 openSleepActivity();
             }
         });
+         */
     }
     public void openSleepActivity() {
         Intent i = new Intent(this, sleep_activity.class);
@@ -121,5 +173,18 @@ public class ProfileActivity extends AppCompatActivity {
         super.onPause();
 
         MainActivity.closeDrawer(dl);
+    }
+
+    // get month and year for Firebase db
+    private String getYear () {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy");
+        Date yr = new Date();
+        return dateFormat.format(yr);
+    }
+
+    private String getMonth() {
+        DateFormat dateFormat = new SimpleDateFormat("MM");
+        Date month = new Date();
+        return dateFormat.format(month);
     }
 }
