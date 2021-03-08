@@ -17,6 +17,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class PreviousRecommendations extends AppCompatActivity {
     // Array of strings...
     ListView simpleList;
@@ -24,7 +28,16 @@ public class PreviousRecommendations extends AppCompatActivity {
 
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String userid = user.getUid();
-    DatabaseReference reff = FirebaseDatabase.getInstance().getReference().child("Users").child(userid);
+
+    private static final String USERS = "Users";
+    private String year = getYear();
+    private String month = getMonth();
+
+    DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference userRef = rootRef.child(USERS);
+
+    DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(USERS).child(userid).child("hourSlept").child(year).child(month);
+
 
     // Included a DrawerLayout so must add DL code
     DrawerLayout dl;
@@ -71,5 +84,18 @@ public class PreviousRecommendations extends AppCompatActivity {
     public void openDashboard() {
         Intent i = new Intent(this, Dashboard.class);
         startActivity(i);
+    }
+
+    // get month and year for Firebase db
+    private String getYear () {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy");
+        Date yr = new Date();
+        return dateFormat.format(yr);
+    }
+
+    private String getMonth() {
+        DateFormat dateFormat = new SimpleDateFormat("MM");
+        Date month = new Date();
+        return dateFormat.format(month);
     }
 }

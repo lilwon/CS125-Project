@@ -62,6 +62,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        // Go to Dashboard
         toDashboard = (Button) findViewById(R.id.toDashboard);
         toDashboard.setOnClickListener(new View.OnClickListener() {
             @Override
