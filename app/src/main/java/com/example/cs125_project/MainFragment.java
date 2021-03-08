@@ -37,6 +37,9 @@ public class MainFragment extends Fragment {
     // User Previous Recommendations
     private Button prevRecs;
 
+    // Set Reminders
+    private Button setReminderBtn;
+
     public MainFragment() {
         // Required empty public constructor
     }
@@ -105,6 +108,14 @@ public class MainFragment extends Fragment {
                 openPrevRecActivity();
             }
         });
+
+        setReminderBtn = (Button) getView().findViewById(R.id.reminderBtn);
+        setReminderBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                openReminderActivity();
+            }
+        });
     }
 
     public void openSleepActivity() {
@@ -119,6 +130,11 @@ public class MainFragment extends Fragment {
 
     public void openPrevRecActivity() {
         Intent i = new Intent(getContext(), PreviousRecommendations.class);
+        startActivity(i);
+    }
+
+    public void openReminderActivity() {
+        Intent i = new Intent(getContext(), RemindersActivity.class );
         startActivity(i);
     }
 }
