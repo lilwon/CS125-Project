@@ -38,6 +38,8 @@ public class ProfileActivity extends AppCompatActivity {
     private static final String USERS = "Users";
     private String curUser;
 
+    private Button toDashboard;
+
     DrawerLayout dl;
 
     // TAG for errors
@@ -59,6 +61,15 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        // Go to Dashboard
+        toDashboard = (Button) findViewById(R.id.toDashboard);
+        toDashboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toDashboard();
+            }
+        });
 
         dl = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -175,6 +186,11 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void ClickDashboard(View view) {
         MainActivity.redirectActivity(this, Dashboard.class);
+    }
+
+    public void toDashboard() {
+        Intent i = new Intent(this, Dashboard.class);
+        startActivity(i);
     }
 
 

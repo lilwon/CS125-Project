@@ -30,6 +30,10 @@ public class SleepRecommendation extends AppCompatActivity {
     private String month;
     private String day;
 
+    String rec_hours;
+    Integer int_better;
+    Integer int_mod;
+
     //Initialize all recommendations
     TextView best1,best2,best3,bet1,bet2,bet3,mod1,mod2,mod3;
 
@@ -72,9 +76,9 @@ public class SleepRecommendation extends AppCompatActivity {
                 String age = snapshot.child("age").getValue().toString();
 
                 //Calculate better and moderate sleep hours
-                String rec_hours = calculate_sleep(hours_slept, age);
-                Integer int_better = Integer.parseInt(rec_hours) + 1;
-                Integer int_mod = int_better + 1;
+                rec_hours = calculate_sleep(hours_slept, age);
+                int_better = Integer.parseInt(rec_hours) + 1;
+                int_mod = int_better + 1;
 
 
 
@@ -123,7 +127,29 @@ public class SleepRecommendation extends AppCompatActivity {
 
     public void returnToDashboard() {
         Intent i = new Intent(this, Dashboard.class);
+
+        storeToDatabase();
         startActivity(i);
+    }
+
+
+    private String getDateTime() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
+
+    public void storeToDatabase() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String useruid = user.getUid();
+
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+        String currentDate = getDateTime();
+        // Create a new Node on database..
+        db.child("Users").child(useruid).child("hourSlept").child(currentDate).child("best_rec").setValue(Integer.parseInt(rec_hours));
+        db.child("Users").child(useruid).child("hourSlept").child(currentDate).child("better_rec").setValue(int_better);
+        db.child("Users").child(useruid).child("hourSlept").child(currentDate).child("mod_rec").setValue(int_mod);
+
     }
 
     private String getYear () {
@@ -206,5 +232,7 @@ public class SleepRecommendation extends AppCompatActivity {
         }
 
     }
+
+
 
 }
