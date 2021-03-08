@@ -7,21 +7,21 @@
     android:id="@+id/drawer_layout"
     tools:context=".ProfileActivity">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <include layout="@layout/main_toolbar" />
 
-        <!-- Welcome Name -->
+        <!-- Welcome Banner -->
         <LinearLayout
             android:id="@+id/welcome_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingLeft="25dp"
-            android:paddingTop="60dp">
+            android:paddingTop="20dp">
 
             <TextView
                 android:id="@+id/welcomeMsg"
@@ -31,6 +31,7 @@
                 android:text="Hello, "
                 android:textSize="55dp" />
 
+            <!-- User's Name -->
             <TextView
                 android:id="@+id/welcomeBanner"
                 android:layout_width="wrap_content"
@@ -42,8 +43,16 @@
         <View
             android:id="@+id/emptySpace"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="25dp"
             android:layout_below="@id/welcome_layout"></View>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_below="@id/emptySpace2"
+            android:background="#cccccc">
+
+        </View>
 
         <!-- User Goals -->
         <LinearLayout
@@ -97,7 +106,7 @@
         <View
             android:id="@+id/emptySpace2"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="15dp"
             android:layout_below="@id/user_goals">
         </View>
 
@@ -157,7 +166,28 @@
             </LinearLayout>
         </LinearLayout>
 
-    </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/user_goals">
+        </View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/response_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="300dp"

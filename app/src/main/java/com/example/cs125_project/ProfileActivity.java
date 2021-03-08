@@ -32,6 +32,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private TextView usernameText;
     private TextView idealHrsText;
+    private TextView responseText; // Create multiple responses if below/above/doing well
 
     // How users labeled in Firebase DB
     private static final String USERS = "Users";
@@ -50,6 +51,9 @@ public class ProfileActivity extends AppCompatActivity {
     // Reading data from Firebase
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String userid = user.getUid();
+
+    private int idealHrsUserVal;
+    private double avg; // Hold avg value outside
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +94,11 @@ public class ProfileActivity extends AppCompatActivity {
                         userFullName = ds.child("fullname").getValue(String.class);
 
                         idealHrsString = String.valueOf(ds.child("goals").child("idealHr").getValue(Integer.class));
+                        idealHrsUserVal = Integer.valueOf(idealHrsString);
+
+                        Log.v("sum", String.valueOf(idealHrsUserVal));
+
+                        createResponse();
 
                         break;
                     }
@@ -128,18 +137,21 @@ public class ProfileActivity extends AppCompatActivity {
                 }
 
                 Log.v("Sum", String.valueOf(sum));
-                double avg = (double)sum /(double) hoursList.size();
+                avg = (double)sum /(double) hoursList.size();
                 String avgStr = String.format("%.2f", avg);
                 Log.v("sum", avgStr);
 
                 // Change text to avg hours
                 avgHrsText.setText(avgStr);
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+
+        // Create some response to tell user that they're doing well/not
 
     }
     public void openSleepActivity() {
@@ -184,5 +196,23 @@ public class ProfileActivity extends AppCompatActivity {
         DateFormat dateFormat = new SimpleDateFormat("MM");
         Date month = new Date();
         return dateFormat.format(month);
+    }
+
+    private void createResponse() {
+        responseText = (TextView) findViewById(R.id.response_text);
+
+        // If your average is 2 hours below your ideal goal
+
+        Log.v("sum1", String.valueOf(idealHrsUserVal));
+
+        if ( avg < (double)idealHrsUserVal-2 ) {
+            responseText.setText("You aren't getting enough sleep at night. " +
+                    "Please follow our recommendations to help improve your sleep schedule.");
+        }
+        else  {
+            responseText.setText("You are currently within your goal! Keep it up!");
+        }
+
+        //responseText.setText();
     }
 }
