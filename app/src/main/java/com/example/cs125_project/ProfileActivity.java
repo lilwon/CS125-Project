@@ -109,28 +109,28 @@ public class ProfileActivity extends AppCompatActivity {
         avgHrsText =(TextView) findViewById(R.id.avg_hr_sleep);
         // Calculating average from Firebase data
         ref.addValueEventListener(new ValueEventListener() {
-            ArrayList<Long> hoursList = new ArrayList<Long>();
+            ArrayList<Integer> hoursList = new ArrayList<Integer>();
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 // Get all the values from Database
                 hoursList.clear();
                 for (DataSnapshot ds : snapshot.getChildren() ) {
-                    // getValue only returns Long.. need to change to double?
-                    Long hourVal = (Long) ds.child("hours").getValue();
-                    hoursList.add(hourVal);
+                    int val;
+                    Number hourVal = (Number) ds.child("hours").getValue();
+                    val = hourVal.intValue();
+                    hoursList.add(val);
                 }
 
                 // MAY NEED TO CHANGE TO DOUBLES LATER
-                // Calculate average
-                Long sum = 0L;
-                for ( Long d : hoursList ) {
+                int sum = 0;
+                for ( Integer d : hoursList ) {
                     sum += d;
                 }
 
-                //Log.v("Sum", String.valueOf(sum));
-                Long avg = sum / hoursList.size();
-                String avgStr = String.valueOf(avg);
-                //Log.v("sum", avgStr);
+                Log.v("Sum", String.valueOf(sum));
+                double avg = (double)sum /(double) hoursList.size();
+                String avgStr = String.format("%.2f", avg);
+                Log.v("sum", avgStr);
 
                 // Change text to avg hours
                 avgHrsText.setText(avgStr);
