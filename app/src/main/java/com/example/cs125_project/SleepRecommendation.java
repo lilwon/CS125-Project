@@ -146,7 +146,7 @@ public class SleepRecommendation extends AppCompatActivity {
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
         String currentDate = getDateTime();
         // Create a new Node on database..
-        db.child("Users").child(useruid).child("hourSlept").child(currentDate).child("best_rec").setValue(rec_hours);
+        db.child("Users").child(useruid).child("hourSlept").child(currentDate).child("best_rec").setValue(Integer.parseInt(rec_hours));
         db.child("Users").child(useruid).child("hourSlept").child(currentDate).child("better_rec").setValue(int_better);
         db.child("Users").child(useruid).child("hourSlept").child(currentDate).child("mod_rec").setValue(int_mod);
 
