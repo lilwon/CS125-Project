@@ -19,9 +19,9 @@
             android:id="@+id/welcome_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="60dp"
+            android:orientation="horizontal"
             android:paddingLeft="25dp"
-            android:orientation="horizontal" >
+            android:paddingTop="60dp">
 
             <TextView
                 android:id="@+id/welcomeMsg"
@@ -37,60 +37,48 @@
                 android:layout_height="80dp"
                 android:textSize="40dp" />
         </LinearLayout>
-        <!--
-        <Button
-            android:id="@+id/sleeptestBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="115dp"
-            android:layout_marginLeft="115dp"
-            android:layout_marginTop="360dp"
-            android:text="Set Sleep Time"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.546"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.428" />
-         -->
 
         <!-- Empty Space -->
         <View
             android:id="@+id/emptySpace"
-            android:layout_below="@id/welcome_layout"
             android:layout_width="match_parent"
-            android:layout_height="50dp" >
-        </View>
+            android:layout_height="50dp"
+            android:layout_below="@id/welcome_layout"></View>
 
-        <!-- More info below -->
+        <!-- User Goals -->
         <LinearLayout
-            android:layout_below="@id/emptySpace"
+            android:id="@+id/user_goals"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/emptySpace"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Your average sleeping time:"
                 android:paddingLeft="10dp"
-                android:textSize="30sp"/>
+                android:text="Current Goals"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="Your ideal hours of sleep per day: "
+                android:textSize="25dp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/avg_hr_sleep"
+                    android:id="@+id/ideal_hrs_txt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="30sp"
-                    android:gravity="center" />
+                    android:textSize="25dp" />
 
                 <View
                     android:layout_width="10dp"
@@ -100,7 +88,71 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="hours"
-                    android:textSize="30dp"/>
+                    android:textSize="25dp" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/emptySpace2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/user_goals">
+        </View>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_below="@id/emptySpace2"
+            android:background="#cccccc">
+
+        </View>
+
+        <!-- Progress -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/divider"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="Your Progress"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="Logged average hours of sleep:"
+                android:textSize="25sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/avg_hr_sleep"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="25sp" />
+
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="0dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="hours"
+                    android:textSize="25dp" />
 
             </LinearLayout>
         </LinearLayout>

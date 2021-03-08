@@ -29,9 +29,9 @@ import java.util.Date;
 
 
 public class ProfileActivity extends AppCompatActivity {
-    private Button sleepBtn;
 
     private TextView usernameText;
+    private TextView idealHrsText;
 
     // How users labeled in Firebase DB
     private static final String USERS = "Users";
@@ -73,10 +73,11 @@ public class ProfileActivity extends AppCompatActivity {
 
         // Changing this TextView
         usernameText = findViewById(R.id.welcomeBanner);
-
+        idealHrsText = findViewById(R.id.ideal_hrs_txt);
         // Reading from the Firebase db for name
         userRef.addValueEventListener(new ValueEventListener() {
             String userFullName;
+            String idealHrsString;
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 // look through every instance of user
@@ -87,11 +88,16 @@ public class ProfileActivity extends AppCompatActivity {
                         // usernameText.setText(ds.child("fullname").getValue(String.class));
 
                         userFullName = ds.child("fullname").getValue(String.class);
+
+                        idealHrsString = String.valueOf(ds.child("goals").child("idealHr").getValue(Integer.class));
+
                         break;
                     }
                 }
                 // Change text to name
                 usernameText.setText(userFullName);
+                // Change ideal hours text
+                idealHrsText.setText(idealHrsString);
             }
 
             @Override
@@ -134,15 +140,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-        /*
-        sleepBtn = (Button) findViewById(R.id.sleeptestBtn);
-        sleepBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                openSleepActivity();
-            }
-        });
-         */
+
     }
     public void openSleepActivity() {
         Intent i = new Intent(this, sleep_activity.class);
