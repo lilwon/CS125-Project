@@ -161,8 +161,8 @@
                 android:id="@+id/rec_back_button"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:text="Back"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:text="Back" />
 
             <View
                 android:layout_weight="1"
@@ -173,8 +173,8 @@
                 android:id="@+id/returnDashboardBtn"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:text="Return"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:text="Return" />
         </LinearLayout>
     </LinearLayout>
 
