@@ -36,6 +36,11 @@ public class SleepRecommendation extends AppCompatActivity {
     Integer int_mod;
     Integer int_activefb;
     Integer int_sleepfb;
+    Integer best_start_sleep;
+    Integer best_end_sleep;
+    Integer bet_end_sleep;
+    Integer mod_end_sleep;
+
 
     //Initialize all recommendations
     TextView best1,best2,best3,bet1,bet2,bet3,mod1,mod2,mod3;
@@ -59,8 +64,6 @@ public class SleepRecommendation extends AppCompatActivity {
         mod1 = (TextView)findViewById(R.id.mod_view1);
         mod2 = (TextView)findViewById(R.id.mod_view2);
         mod3 = (TextView)findViewById(R.id.mod_view3);
-        //a = (TextView)findViewById(R.id.active_level_view);
-        //b = (TextView)findViewById(R.id.sleep_level_view);
 
         reff.addValueEventListener(new ValueEventListener() {
             @Override
@@ -78,8 +81,7 @@ public class SleepRecommendation extends AppCompatActivity {
                 String age = snapshot.child("age").getValue().toString();
 
                 //Calculate best, better, moderate hours
-                //Currently calculated based on age, active feedback, sleep feedback
-
+                //Calculated based on age, active feedback, sleep feedback
                 rec_hours = calculate_sleep(hours_slept, age);
                 int_best = Integer.parseInt(rec_hours);
                 int_activefb = Integer.parseInt(active);
@@ -92,20 +94,19 @@ public class SleepRecommendation extends AppCompatActivity {
                 int_better = int_best + 1;
                 int_mod = int_best + 2;
 
-
+                //Calculate sleep schedules
+                calc_schedule(int_best, age);
 
                 //Display text on page
-                //To Do: INCLUDE SLEEP SCHEDULES
-
-                best1.setText(int_best + " hours");
-                best2.setText(int_best + " hours");
-                best3.setText(int_best + " hours");
-                bet1.setText(int_better + " hours");
-                bet2.setText(int_better + " hours");
-                bet3.setText(int_better + " hours");
-                mod1.setText(int_mod + " hours");
-                mod2.setText(int_mod + " hours");
-                mod3.setText(int_mod + " hours");
+                best1.setText(best_start_sleep + ":00PM - " + best_end_sleep + ":00AM" + " (" + int_best + " hours)");
+                best2.setText((best_start_sleep + 1) + ":00PM - " + (best_end_sleep + 1) + ":00AM" + " (" + int_best + " hours)");
+                best3.setText((best_start_sleep - 1) + ":00PM - " + (best_end_sleep - 1) + ":00AM" + " (" + int_best + " hours)");
+                bet1.setText(best_start_sleep + ":00PM - " + bet_end_sleep + ":00AM" + " (" + int_better + " hours)");
+                bet2.setText((best_start_sleep + 1) + ":00PM - " + (bet_end_sleep + 1) + ":00AM" + " (" + int_better + " hours)");
+                bet3.setText((best_start_sleep - 1) + ":00PM - " + (bet_end_sleep - 1) + ":00AM" + " (" + int_better + " hours)");
+                mod1.setText(best_start_sleep + ":00PM - " + mod_end_sleep + ":00AM" + " (" + int_mod + " hours)");
+                mod2.setText((best_start_sleep + 1) + ":00PM - " + (mod_end_sleep + 1) + ":00AM" + " (" + int_mod + " hours)");
+                mod3.setText((best_start_sleep - 1) + ":00PM - " + (mod_end_sleep - 1) + ":00AM" + " (" + int_mod + " hours)");
             }
 
             @Override
@@ -191,8 +192,6 @@ public class SleepRecommendation extends AppCompatActivity {
     //61-64 Years = 7-9 hrs
     //65+ Years = 7-8 hrs
 
-    //To Do:
-    //Have to take into account prev hours
     public String calculate_sleep(String hours_slept, String age)
     {
         Integer int_age = Integer.parseInt(age);
@@ -233,6 +232,75 @@ public class SleepRecommendation extends AppCompatActivity {
         else                                        //Age 65+
         {
             return "7";
+        }
+
+    }
+    public void calc_schedule(Integer int_best, String age)
+    {
+        Integer int_age = Integer.parseInt(age);
+
+        if (int_age < 0.33)                                     //Age 0-3 Months
+        {
+            best_start_sleep = 7;
+            best_end_sleep = (best_start_sleep + int_best) - 12;
+            bet_end_sleep = (best_start_sleep + int_better) - 12;
+            mod_end_sleep = (best_start_sleep + int_mod) - 12;
+        }
+        if (int_age >= 0.33 && int_age <= 12)                   //Age 4-12 Months
+        {
+            best_start_sleep = 7;
+            best_end_sleep = (best_start_sleep + int_best) - 12;
+            bet_end_sleep = (best_start_sleep + int_better) - 12;
+            mod_end_sleep = (best_start_sleep + int_mod) - 12;
+        }
+        if (int_age >= 1 && int_age <= 2)                       //Age 1-2
+        {
+            best_start_sleep = 8;
+            best_end_sleep = (best_start_sleep + int_best) - 12;
+            bet_end_sleep = (best_start_sleep + int_better) - 12;
+            mod_end_sleep = (best_start_sleep + int_mod) - 12;
+        }
+        else if (int_age >= 3 && int_age <= 5)                  //Age 3-5
+        {
+            best_start_sleep = 8;
+            best_end_sleep = (best_start_sleep + int_best) - 12;
+            bet_end_sleep = (best_start_sleep + int_better) - 12;
+            mod_end_sleep = (best_start_sleep + int_mod) - 12;
+        }
+        else if (int_age >= 6 && int_age <= 12)                //Age 6-12
+        {
+            best_start_sleep = 9;
+            best_end_sleep = (best_start_sleep + int_best) - 12;
+            bet_end_sleep = (best_start_sleep + int_better) - 12;
+            mod_end_sleep = (best_start_sleep + int_mod) - 12;
+        }
+        else if (int_age  >= 13 && int_age <= 18)              //Age 13-18
+        {
+            best_start_sleep = 10;
+            best_end_sleep = (best_start_sleep + int_best) - 12;
+            bet_end_sleep = (best_start_sleep + int_better) - 12;
+            mod_end_sleep = (best_start_sleep + int_mod) - 12;
+        }
+        else if (int_age >= 19 && int_age <= 60)               //Age 19-60
+        {
+            best_start_sleep = 10;
+            best_end_sleep = (best_start_sleep + int_best) - 12;
+            bet_end_sleep = (best_start_sleep + int_better) - 12;
+            mod_end_sleep = (best_start_sleep + int_mod) - 12;
+        }
+        else if (int_age >= 61 && int_age <= 64)               //Age 61-64
+        {
+            best_start_sleep = 10;
+            best_end_sleep = (best_start_sleep + int_best) - 12;
+            bet_end_sleep = (best_start_sleep + int_better) - 12;
+            mod_end_sleep = (best_start_sleep + int_mod) - 12;
+        }
+        else                                                   //Age 65+
+        {
+            best_start_sleep = 10;
+            best_end_sleep = (best_start_sleep + int_best) - 12;
+            bet_end_sleep = (best_start_sleep + int_better) - 12;
+            mod_end_sleep = (best_start_sleep + int_mod) - 12;
         }
 
     }
