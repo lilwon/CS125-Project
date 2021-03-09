@@ -44,7 +44,7 @@ public class PreviousRecommendations extends AppCompatActivity {
     DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference userRef = rootRef.child(USERS);
 
-    DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(USERS).child(userid).child("hourSlept").child(year).child(month);
+    //DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(USERS).child(userid).child("hourSlept").child(year).child(month);
 
 
     // Included a DrawerLayout so must add DL code
