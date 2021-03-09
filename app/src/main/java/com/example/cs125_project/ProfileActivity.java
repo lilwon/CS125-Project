@@ -221,12 +221,12 @@ public class ProfileActivity extends AppCompatActivity {
 
         Log.v("sum1", String.valueOf(idealHrsUserVal));
 
-        if ( avg < (double)idealHrsUserVal-2 ) {
-            responseText.setText("You aren't getting enough sleep at night. " +
+        if ( avg < (double)idealHrsUserVal-0.75) {
+            responseText.setText("You aren't reaching your goal. " +
                     "Please follow our recommendations to help improve your sleep schedule.");
         }
         else  {
-            responseText.setText("You are currently within your goal! Keep it up!");
+            responseText.setText("Your goal is currently within reach! Keep it up!");
         }
 
         //responseText.setText();
