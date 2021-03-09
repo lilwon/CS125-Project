@@ -44,7 +44,7 @@ public class PreviousRecommendations extends AppCompatActivity {
     DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference userRef = rootRef.child(USERS);
 
-    //DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(USERS).child(userid).child("hourSlept").child(year).child(month);
+    DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(USERS).child(userid).child("hourSlept").child(year).child(month);
 
 
     // Included a DrawerLayout so must add DL code
@@ -59,7 +59,7 @@ public class PreviousRecommendations extends AppCompatActivity {
 
         previous_rec_list.clear();
         // READ DATA FROM FIREBASE
-        userRef.addValueEventListener(new ValueEventListener() {
+        ref.addValueEventListener(new ValueEventListener() {
 
             Integer best_rec;
             Integer better_rec;
@@ -69,19 +69,19 @@ public class PreviousRecommendations extends AppCompatActivity {
 
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-
+                previous_rec_list.clear();
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     // ds.child("hourSlept").child(currentDate).child("best_rec").getValue())
-                    best_rec = ds.child("hourSlept").child(currentDate).child("best_rec").getValue(Integer.class);
-                    better_rec = ds.child("hourSlept").child(currentDate).child("better_rec").getValue(Integer.class);
-                    mod_rec = ds.child("hourSlept").child(currentDate).child("mod_rec").getValue(Integer.class);
+                    best_rec = ds.child("best_rec").getValue(Integer.class);
+                    better_rec = ds.child("better_rec").getValue(Integer.class);
+                    mod_rec = ds.child("mod_rec").getValue(Integer.class);
                     previous_rec_list.add(String.valueOf(best_rec));
                     previous_rec_list.add(String.valueOf(better_rec));
                     previous_rec_list.add(String.valueOf(mod_rec));
-//                    Log.v("FULL ARRAY", String.valueOf(previous_rec_list));
-//                    Log.v("best rec ", String.valueOf(previous_rec_list.get(0)));
-//                    Log.v("better rec ", String.valueOf(previous_rec_list.get(1)));
-//                    Log.v("mod rec ", String.valueOf(previous_rec_list.get(2)));
+                    Log.v("FULL ARRAY", String.valueOf(previous_rec_list));
+                    Log.v("best rec ", String.valueOf(previous_rec_list.get(0)));
+                    Log.v("better rec ", String.valueOf(previous_rec_list.get(1)));
+                    Log.v("mod rec ", String.valueOf(previous_rec_list.get(2)));
                 }
                 set_array();
             }
