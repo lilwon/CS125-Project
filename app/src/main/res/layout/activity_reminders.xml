@@ -35,20 +35,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:timePickerMode="spinner" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/set_time_btn"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="Set Time"
-                    android:layout_centerInParent="true"/>
-            </RelativeLayout>
-
         </LinearLayout>
 
         <!-- Text and Return button-->
@@ -62,12 +48,19 @@
                 android:layout_height="50dp" />
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Daily Notification Set:"
+                android:gravity="center"
+                android:textSize="25dp"/>
+
+            <TextView
                 android:id="@+id/time_set_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Test"
                 android:gravity="center"
-                android:textSize="25dp"/>
+                android:text="22:00"
+                android:textSize="25dp" />
 
             <View
                 android:layout_width="match_parent"

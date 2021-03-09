@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CS125Project">
         <activity android:name=".RemindersActivity"></activity>
+        <receiver android:name=".AlertReceiver" />
         <activity android:name=".ActiveLevelFeedback" />
         <activity android:name=".SleepFeedback" />
         <activity android:name=".ProfileActivity" />
