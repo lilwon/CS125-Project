@@ -242,66 +242,42 @@ public class SleepRecommendation extends AppCompatActivity {
         if (int_age < 0.33)                                     //Age 0-3 Months
         {
             best_start_sleep = 7;
-            best_end_sleep = (best_start_sleep + int_best) - 12;
-            bet_end_sleep = (best_start_sleep + int_better) - 12;
-            mod_end_sleep = (best_start_sleep + int_mod) - 12;
         }
         if (int_age >= 0.33 && int_age <= 12)                   //Age 4-12 Months
         {
             best_start_sleep = 7;
-            best_end_sleep = (best_start_sleep + int_best) - 12;
-            bet_end_sleep = (best_start_sleep + int_better) - 12;
-            mod_end_sleep = (best_start_sleep + int_mod) - 12;
         }
         if (int_age >= 1 && int_age <= 2)                       //Age 1-2
         {
             best_start_sleep = 8;
-            best_end_sleep = (best_start_sleep + int_best) - 12;
-            bet_end_sleep = (best_start_sleep + int_better) - 12;
-            mod_end_sleep = (best_start_sleep + int_mod) - 12;
         }
         else if (int_age >= 3 && int_age <= 5)                  //Age 3-5
         {
             best_start_sleep = 8;
-            best_end_sleep = (best_start_sleep + int_best) - 12;
-            bet_end_sleep = (best_start_sleep + int_better) - 12;
-            mod_end_sleep = (best_start_sleep + int_mod) - 12;
         }
         else if (int_age >= 6 && int_age <= 12)                //Age 6-12
         {
             best_start_sleep = 9;
-            best_end_sleep = (best_start_sleep + int_best) - 12;
-            bet_end_sleep = (best_start_sleep + int_better) - 12;
-            mod_end_sleep = (best_start_sleep + int_mod) - 12;
         }
         else if (int_age  >= 13 && int_age <= 18)              //Age 13-18
         {
             best_start_sleep = 10;
-            best_end_sleep = (best_start_sleep + int_best) - 12;
-            bet_end_sleep = (best_start_sleep + int_better) - 12;
-            mod_end_sleep = (best_start_sleep + int_mod) - 12;
         }
         else if (int_age >= 19 && int_age <= 60)               //Age 19-60
         {
             best_start_sleep = 10;
-            best_end_sleep = (best_start_sleep + int_best) - 12;
-            bet_end_sleep = (best_start_sleep + int_better) - 12;
-            mod_end_sleep = (best_start_sleep + int_mod) - 12;
         }
         else if (int_age >= 61 && int_age <= 64)               //Age 61-64
         {
             best_start_sleep = 10;
-            best_end_sleep = (best_start_sleep + int_best) - 12;
-            bet_end_sleep = (best_start_sleep + int_better) - 12;
-            mod_end_sleep = (best_start_sleep + int_mod) - 12;
         }
         else                                                   //Age 65+
         {
             best_start_sleep = 10;
-            best_end_sleep = (best_start_sleep + int_best) - 12;
-            bet_end_sleep = (best_start_sleep + int_better) - 12;
-            mod_end_sleep = (best_start_sleep + int_mod) - 12;
         }
+        best_end_sleep = (best_start_sleep + int_best) - 12;
+        bet_end_sleep = (best_start_sleep + int_better) - 12;
+        mod_end_sleep = (best_start_sleep + int_mod) - 12;
 
     }
 
