@@ -77,10 +77,13 @@ public class PreviousRecommendations extends AppCompatActivity {
                         best_rec = ds.child("best_rec").getValue(Integer.class);
                         better_rec = ds.child("better_rec").getValue(Integer.class);
                         mod_rec = ds.child("mod_rec").getValue(Integer.class);
-                        String entry = getDateTime() + ": \n" + "Best: " + best_rec + ", Better: " + better_rec + ", Moderate: " + mod_rec;
+                        String entry = "2021/03/" + ds.getKey() + ": \n" + "Best: " + best_rec + ", Better: " + better_rec + ", Moderate: " + mod_rec;
+                        /*
                         if (!previous_rec_list.contains(entry)) {
                             previous_rec_list.add(String.valueOf(entry));
                         }
+                        */
+                        previous_rec_list.add(String.valueOf(entry));
                         Log.v("FULL ARRAY", String.valueOf(previous_rec_list));
 //                    Log.v("best rec ", String.valueOf(previous_rec_list.get(0)));
 //                    Log.v("better rec ", String.valueOf(previous_rec_list.get(1)));
