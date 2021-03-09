@@ -3,11 +3,14 @@ package com.example.cs125_project;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -22,6 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.List;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -32,7 +36,6 @@ public class PreviousRecommendations extends AppCompatActivity {
     // Array of strings...
     ListView simpleList;
     ArrayList<String> previous_rec_list = new ArrayList<String>();
-            //String mobileArray[] = {"sleep rec1", "sleep rec2", "sleep rec3", "sleep rec4", "sleep rec5", "sleep rec6"};
 
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String userid = user.getUid();
@@ -51,6 +54,11 @@ public class PreviousRecommendations extends AppCompatActivity {
     DrawerLayout dl;
 
     private Button backBtn;
+
+    // Implement Search
+    private EditText search;
+    // Declare as global to search
+    ArrayAdapter arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +108,23 @@ public class PreviousRecommendations extends AppCompatActivity {
 
         });
 
+        search = (EditText) findViewById(R.id.search_field_text);
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                (PreviousRecommendations.this).arrayAdapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         dl = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -116,7 +141,7 @@ public class PreviousRecommendations extends AppCompatActivity {
 
     public void set_array() {
         simpleList = (ListView) findViewById(R.id.prev_recs);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_previous_recommendations, R.id.textView, previous_rec_list);
+        arrayAdapter = new ArrayAdapter(this, R.layout.activity_previous_recommendations, R.id.textView, previous_rec_list);
         simpleList.setAdapter(arrayAdapter);
     }
 

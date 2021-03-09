@@ -33,6 +33,12 @@
             android:textSize="25sp"
             android:gravity="center" />
 
+        <EditText
+            android:id="@+id/search_field_text"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Search a date"/>
+
         <ListView
             android:id="@+id/prev_recs"
             android:layout_width="wrap_content"
