@@ -34,8 +34,8 @@ public class SleepRecommendation extends AppCompatActivity {
     Integer int_best;
     Integer int_better;
     Integer int_mod;
-    Integer int_activefb;
-    Integer int_sleepfb;
+    Float flt_activefb;
+    Float flt_sleepfb;
     Integer best_start_sleep;
     Integer best_end_sleep;
     Integer bet_end_sleep;
@@ -84,10 +84,11 @@ public class SleepRecommendation extends AppCompatActivity {
                 //Calculated based on age, active feedback, sleep feedback
                 rec_hours = calculate_sleep(age);
                 int_best = Integer.parseInt(rec_hours);
-                int_activefb = Integer.parseInt(active);
-                int_sleepfb = Integer.parseInt(sleep);
+                flt_activefb = Float.parseFloat(active);
+                flt_sleepfb = Float.parseFloat(sleep);
 
-                if (int_activefb >= 3 && int_sleepfb <= 3)
+                //If active levels = high and sleep levels = low, increment hour to sleep_rec
+                if (flt_activefb >= 3 && flt_sleepfb <= 3)
                 {
                     int_best++;
                 }
