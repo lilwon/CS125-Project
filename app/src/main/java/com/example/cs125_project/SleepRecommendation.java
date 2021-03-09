@@ -31,8 +31,11 @@ public class SleepRecommendation extends AppCompatActivity {
     private String day;
 
     String rec_hours;
+    Integer int_best;
     Integer int_better;
     Integer int_mod;
+    Integer int_activefb;
+    Integer int_sleepfb;
 
     //Initialize all recommendations
     TextView best1,best2,best3,bet1,bet2,bet3,mod1,mod2,mod3;
@@ -68,28 +71,35 @@ public class SleepRecommendation extends AppCompatActivity {
                 day = getDay();
 
                 //Get info from Firebase
-
-                //String active = snapshot.child("activeRating").getValue().toString();
-                //String sleep = snapshot.child("sleepRating").getValue().toString();
                 //String hours_slept = snapshot.child("hourSlept").child("uniqueDate").child("hours").getValue().toString();
                 String hours_slept = snapshot.child("hourSlept").child(year).child(month).child(day).child("hours").getValue().toString();
+                String active = snapshot.child("hourSlept").child(year).child(month).child(day).child("activeRating").getValue().toString();
+                String sleep = snapshot.child("hourSlept").child(year).child(month).child(day).child("sleepRating").getValue().toString();
                 String age = snapshot.child("age").getValue().toString();
 
-                //Calculate better and moderate sleep hours
+                //Calculate best, better, moderate hours
+                //Currently calculated based on age, active feedback, sleep feedback
+
                 rec_hours = calculate_sleep(hours_slept, age);
-                int_better = Integer.parseInt(rec_hours) + 1;
-                int_mod = int_better + 1;
+                int_best = Integer.parseInt(rec_hours);
+                int_activefb = Integer.parseInt(active);
+                int_sleepfb = Integer.parseInt(sleep);
+
+                if (int_activefb >= 3 && int_sleepfb <= 3)
+                {
+                    int_best++;
+                }
+                int_better = int_best + 1;
+                int_mod = int_best + 2;
 
 
 
                 //Display text on page
                 //To Do: INCLUDE SLEEP SCHEDULES
 
-                //a.setText(active);
-                //b.setText(sleep);
-                best1.setText(rec_hours + " hours");
-                best2.setText(rec_hours + " hours");
-                best3.setText(rec_hours + " hours");
+                best1.setText(int_best + " hours");
+                best2.setText(int_best + " hours");
+                best3.setText(int_best + " hours");
                 bet1.setText(int_better + " hours");
                 bet2.setText(int_better + " hours");
                 bet3.setText(int_better + " hours");
@@ -146,7 +156,7 @@ public class SleepRecommendation extends AppCompatActivity {
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
         String currentDate = getDateTime();
         // Create a new Node on database..
-        db.child("Users").child(useruid).child("hourSlept").child(currentDate).child("best_rec").setValue(Integer.parseInt(rec_hours));
+        db.child("Users").child(useruid).child("hourSlept").child(currentDate).child("best_rec").setValue(int_best);
         db.child("Users").child(useruid).child("hourSlept").child(currentDate).child("better_rec").setValue(int_better);
         db.child("Users").child(useruid).child("hourSlept").child(currentDate).child("mod_rec").setValue(int_mod);
 
@@ -181,16 +191,10 @@ public class SleepRecommendation extends AppCompatActivity {
     //61-64 Years = 7-9 hrs
     //65+ Years = 7-8 hrs
 
-    //WORK IN PROGRESS (ONLY TAKING AGE CURRENTLY)
     //To Do:
-    //Have to take into account prev hours, activity feedback, sleep feedback, etc.
-    //Have to get best, better, moderate
-        //PLAN (MAYBE):
-        //1) Calculate the sleep hours and then increment by 1 or decrement by 1 to get better/moderate
-
+    //Have to take into account prev hours
     public String calculate_sleep(String hours_slept, String age)
     {
-        //Change into int to calculate
         Integer int_age = Integer.parseInt(age);
         Integer int_hrs_slept = Integer.parseInt(hours_slept);
 
