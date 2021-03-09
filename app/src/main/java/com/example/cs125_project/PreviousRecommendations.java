@@ -31,8 +31,8 @@ import java.util.Date;
 public class PreviousRecommendations extends AppCompatActivity {
     // Array of strings...
     ListView simpleList;
-    ArrayList<String> previous_rec_list  = new ArrayList<String>();
-    //String mobileArray[] = {"sleep rec1", "sleep rec2", "sleep rec3", "sleep rec4", "sleep rec5", "sleep rec6"};
+    ArrayList<String> previous_rec_list = new ArrayList<String>();
+            //String mobileArray[] = {"sleep rec1", "sleep rec2", "sleep rec3", "sleep rec4", "sleep rec5", "sleep rec6"};
 
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String userid = user.getUid();
@@ -57,7 +57,7 @@ public class PreviousRecommendations extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_previous_recommendations_main);
 
-
+        previous_rec_list.clear();
         // READ DATA FROM FIREBASE
         userRef.addValueEventListener(new ValueEventListener() {
 
@@ -69,22 +69,30 @@ public class PreviousRecommendations extends AppCompatActivity {
 
             @Override
             public void onDataChange(DataSnapshot snapshot) {
+
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     // ds.child("hourSlept").child(currentDate).child("best_rec").getValue())
                     best_rec = ds.child("hourSlept").child(currentDate).child("best_rec").getValue(Integer.class);
                     better_rec = ds.child("hourSlept").child(currentDate).child("better_rec").getValue(Integer.class);
+                    mod_rec = ds.child("hourSlept").child(currentDate).child("mod_rec").getValue(Integer.class);
                     previous_rec_list.add(String.valueOf(best_rec));
                     previous_rec_list.add(String.valueOf(better_rec));
-                    Log.v("best rec ", String.valueOf(previous_rec_list.get(1)));
-                    Log.v("better rec ", String.valueOf(previous_rec_list.get(1)));
+                    previous_rec_list.add(String.valueOf(mod_rec));
+//                    Log.v("FULL ARRAY", String.valueOf(previous_rec_list));
+//                    Log.v("best rec ", String.valueOf(previous_rec_list.get(0)));
+//                    Log.v("better rec ", String.valueOf(previous_rec_list.get(1)));
+//                    Log.v("mod rec ", String.valueOf(previous_rec_list.get(2)));
                 }
+                set_array();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
 
+
         });
+
 
         dl = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -97,10 +105,15 @@ public class PreviousRecommendations extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void set_array() {
         simpleList = (ListView) findViewById(R.id.prev_recs);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_previous_recommendations, R.id.textView, previous_rec_list);
         simpleList.setAdapter(arrayAdapter);
     }
+
+
 
     // Drawer Layout navigation..
     public void ClickMenu(View view) {
