@@ -31,8 +31,16 @@ public class SleepRecommendation extends AppCompatActivity {
     private String day;
 
     String rec_hours;
+    Integer int_best;
     Integer int_better;
     Integer int_mod;
+    Integer int_activefb;
+    Integer int_sleepfb;
+    Integer best_start_sleep;
+    Integer best_end_sleep;
+    Integer bet_end_sleep;
+    Integer mod_end_sleep;
+
 
     //Initialize all recommendations
     TextView best1,best2,best3,bet1,bet2,bet3,mod1,mod2,mod3;
@@ -56,8 +64,6 @@ public class SleepRecommendation extends AppCompatActivity {
         mod1 = (TextView)findViewById(R.id.mod_view1);
         mod2 = (TextView)findViewById(R.id.mod_view2);
         mod3 = (TextView)findViewById(R.id.mod_view3);
-        //a = (TextView)findViewById(R.id.active_level_view);
-        //b = (TextView)findViewById(R.id.sleep_level_view);
 
         reff.addValueEventListener(new ValueEventListener() {
             @Override
@@ -68,34 +74,39 @@ public class SleepRecommendation extends AppCompatActivity {
                 day = getDay();
 
                 //Get info from Firebase
-
-                //String active = snapshot.child("activeRating").getValue().toString();
-                //String sleep = snapshot.child("sleepRating").getValue().toString();
                 //String hours_slept = snapshot.child("hourSlept").child("uniqueDate").child("hours").getValue().toString();
                 String hours_slept = snapshot.child("hourSlept").child(year).child(month).child(day).child("hours").getValue().toString();
+                String active = snapshot.child("hourSlept").child(year).child(month).child(day).child("activeRating").getValue().toString();
+                String sleep = snapshot.child("hourSlept").child(year).child(month).child(day).child("sleepRating").getValue().toString();
                 String age = snapshot.child("age").getValue().toString();
 
-                //Calculate better and moderate sleep hours
-                rec_hours = calculate_sleep(hours_slept, age);
-                int_better = Integer.parseInt(rec_hours) + 1;
-                int_mod = int_better + 1;
+                //Calculate best, better, moderate hours
+                //Calculated based on age, active feedback, sleep feedback
+                rec_hours = calculate_sleep(age);
+                int_best = Integer.parseInt(rec_hours);
+                int_activefb = Integer.parseInt(active);
+                int_sleepfb = Integer.parseInt(sleep);
 
+                if (int_activefb >= 3 && int_sleepfb <= 3)
+                {
+                    int_best++;
+                }
+                int_better = int_best + 1;
+                int_mod = int_best + 2;
 
+                //Calculate sleep schedules
+                calc_schedule(int_best, age);
 
                 //Display text on page
-                //To Do: INCLUDE SLEEP SCHEDULES
-
-                //a.setText(active);
-                //b.setText(sleep);
-                best1.setText(rec_hours + " hours");
-                best2.setText(rec_hours + " hours");
-                best3.setText(rec_hours + " hours");
-                bet1.setText(int_better + " hours");
-                bet2.setText(int_better + " hours");
-                bet3.setText(int_better + " hours");
-                mod1.setText(int_mod + " hours");
-                mod2.setText(int_mod + " hours");
-                mod3.setText(int_mod + " hours");
+                best1.setText(best_start_sleep + ":00PM - " + best_end_sleep + ":00AM" + " (" + int_best + " hours)");
+                best2.setText((best_start_sleep + 1) + ":00PM - " + (best_end_sleep + 1) + ":00AM" + " (" + int_best + " hours)");
+                best3.setText((best_start_sleep - 1) + ":00PM - " + (best_end_sleep - 1) + ":00AM" + " (" + int_best + " hours)");
+                bet1.setText(best_start_sleep + ":00PM - " + bet_end_sleep + ":00AM" + " (" + int_better + " hours)");
+                bet2.setText((best_start_sleep + 1) + ":00PM - " + (bet_end_sleep + 1) + ":00AM" + " (" + int_better + " hours)");
+                bet3.setText((best_start_sleep - 1) + ":00PM - " + (bet_end_sleep - 1) + ":00AM" + " (" + int_better + " hours)");
+                mod1.setText(best_start_sleep + ":00PM - " + mod_end_sleep + ":00AM" + " (" + int_mod + " hours)");
+                mod2.setText((best_start_sleep + 1) + ":00PM - " + (mod_end_sleep + 1) + ":00AM" + " (" + int_mod + " hours)");
+                mod3.setText((best_start_sleep - 1) + ":00PM - " + (mod_end_sleep - 1) + ":00AM" + " (" + int_mod + " hours)");
             }
 
             @Override
@@ -146,7 +157,7 @@ public class SleepRecommendation extends AppCompatActivity {
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
         String currentDate = getDateTime();
         // Create a new Node on database..
-        db.child("Users").child(useruid).child("hourSlept").child(currentDate).child("best_rec").setValue(Integer.parseInt(rec_hours));
+        db.child("Users").child(useruid).child("hourSlept").child(currentDate).child("best_rec").setValue(int_best);
         db.child("Users").child(useruid).child("hourSlept").child(currentDate).child("better_rec").setValue(int_better);
         db.child("Users").child(useruid).child("hourSlept").child(currentDate).child("mod_rec").setValue(int_mod);
 
@@ -181,18 +192,9 @@ public class SleepRecommendation extends AppCompatActivity {
     //61-64 Years = 7-9 hrs
     //65+ Years = 7-8 hrs
 
-    //WORK IN PROGRESS (ONLY TAKING AGE CURRENTLY)
-    //To Do:
-    //Have to take into account prev hours, activity feedback, sleep feedback, etc.
-    //Have to get best, better, moderate
-        //PLAN (MAYBE):
-        //1) Calculate the sleep hours and then increment by 1 or decrement by 1 to get better/moderate
-
-    public String calculate_sleep(String hours_slept, String age)
+    public String calculate_sleep(String age)
     {
-        //Change into int to calculate
         Integer int_age = Integer.parseInt(age);
-        Integer int_hrs_slept = Integer.parseInt(hours_slept);
 
         if (int_age < 0.33)                         //Age 0-3 Months
         {
@@ -230,6 +232,51 @@ public class SleepRecommendation extends AppCompatActivity {
         {
             return "7";
         }
+
+    }
+    public void calc_schedule(Integer int_best, String age)
+    {
+        Integer int_age = Integer.parseInt(age);
+
+        if (int_age < 0.33)                                     //Age 0-3 Months
+        {
+            best_start_sleep = 7;
+        }
+        if (int_age >= 0.33 && int_age <= 12)                   //Age 4-12 Months
+        {
+            best_start_sleep = 7;
+        }
+        if (int_age >= 1 && int_age <= 2)                       //Age 1-2
+        {
+            best_start_sleep = 8;
+        }
+        else if (int_age >= 3 && int_age <= 5)                  //Age 3-5
+        {
+            best_start_sleep = 8;
+        }
+        else if (int_age >= 6 && int_age <= 12)                //Age 6-12
+        {
+            best_start_sleep = 9;
+        }
+        else if (int_age  >= 13 && int_age <= 18)              //Age 13-18
+        {
+            best_start_sleep = 10;
+        }
+        else if (int_age >= 19 && int_age <= 60)               //Age 19-60
+        {
+            best_start_sleep = 10;
+        }
+        else if (int_age >= 61 && int_age <= 64)               //Age 61-64
+        {
+            best_start_sleep = 10;
+        }
+        else                                                   //Age 65+
+        {
+            best_start_sleep = 10;
+        }
+        best_end_sleep = (best_start_sleep + int_best) - 12;
+        bet_end_sleep = (best_start_sleep + int_better) - 12;
+        mod_end_sleep = (best_start_sleep + int_mod) - 12;
 
     }
 
