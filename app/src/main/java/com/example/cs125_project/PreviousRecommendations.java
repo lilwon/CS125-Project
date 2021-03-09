@@ -77,7 +77,7 @@ public class PreviousRecommendations extends AppCompatActivity {
                         best_rec = ds.child("best_rec").getValue(Integer.class);
                         better_rec = ds.child("better_rec").getValue(Integer.class);
                         mod_rec = ds.child("mod_rec").getValue(Integer.class);
-                        String entry = "2021/03/" + ds.getKey() + ": \n" + "Best: " + best_rec + ", Better: " + better_rec + ", Moderate: " + mod_rec;
+                        String entry = "2021/03/" + ds.getKey() + "\n\n" + "Best: " + best_rec + " hours\nBetter: " + better_rec + " hours\nModerate: " + mod_rec + " hours";
                         /*
                         if (!previous_rec_list.contains(entry)) {
                             previous_rec_list.add(String.valueOf(entry));
