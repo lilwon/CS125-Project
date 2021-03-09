@@ -82,7 +82,7 @@ public class SleepRecommendation extends AppCompatActivity {
 
                 //Calculate best, better, moderate hours
                 //Calculated based on age, active feedback, sleep feedback
-                rec_hours = calculate_sleep(hours_slept, age);
+                rec_hours = calculate_sleep(age);
                 int_best = Integer.parseInt(rec_hours);
                 int_activefb = Integer.parseInt(active);
                 int_sleepfb = Integer.parseInt(sleep);
@@ -192,10 +192,9 @@ public class SleepRecommendation extends AppCompatActivity {
     //61-64 Years = 7-9 hrs
     //65+ Years = 7-8 hrs
 
-    public String calculate_sleep(String hours_slept, String age)
+    public String calculate_sleep(String age)
     {
         Integer int_age = Integer.parseInt(age);
-        Integer int_hrs_slept = Integer.parseInt(hours_slept);
 
         if (int_age < 0.33)                         //Age 0-3 Months
         {
